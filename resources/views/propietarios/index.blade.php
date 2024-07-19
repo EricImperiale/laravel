@@ -50,6 +50,10 @@
                 @endforelse
                 </tbody>
             </table>
+
+            <div id="paginador">
+                {{ $propietarios->links() }}
+            </div>
         </div>
     </section>
 @endsection

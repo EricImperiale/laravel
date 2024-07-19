@@ -9,7 +9,7 @@ class PropietariosController extends Controller
 {
     public function index()
     {
-        $propietarios = Propetario::with(['prefijoTelefonico'])->get();
+        $propietarios = Propetario::with(['prefijoTelefonico'])->paginate(2);
 
         return view('propietarios.index', [
             'propietarios' => $propietarios,
