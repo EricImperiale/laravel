@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $prefijo_telefonico_id
  * @property string $prefijo
@@ -28,4 +29,11 @@ class PrefijoTelefonico extends Model
     //use HasFactory;
 
     protected $primaryKey = 'prefijo_telefonico_id';
+
+    protected function prefijosTelefonicos(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => '+' . $this->prefijo . ' ' . $this->pais,
+        );
+    }
 }

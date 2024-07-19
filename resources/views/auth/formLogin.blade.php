@@ -24,9 +24,9 @@
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             @error('password')
-            <div class="alert alert-danger" role="alert">
-                {{ $message }}
-            </div>
+                <div class="alert alert-danger" role="alert">
+                    {{ $message }}
+                </div>
             @enderror
             <input type="password" id="password" name="password" class="form-control"  value="">
         </div>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\FormatearDatos;
 
 /**
- *
+ * 
  *
  * @property int $propietario_id
  * @property string $nombre
@@ -51,6 +51,8 @@ use App\Traits\FormatearDatos;
  * @method static \Illuminate\Database\Eloquent\Builder|Propetario wherePropietarioId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereProvincia($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereUpdatedAt($value)
+ * @property-read mixed $direccion_completa
+ * @property-read mixed $nombre_completo
  * @mixin \Eloquent
  */
 class Propetario extends Model
