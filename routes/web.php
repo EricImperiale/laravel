@@ -17,5 +17,7 @@ Route::post('cerrar-sesion', [AuthController::class, 'processLogout'])
 
 Route::get('propietarios', [PropietariosController::class, 'index'])
     ->name('propietarios.index');
-Route::get('propietarios/{propietario_id}/editar', [PropietariosController::class, 'formUpdate'])
+Route::get('propietarios/{pi}/editar', [PropietariosController::class, 'formUpdate'])
     ->name('propietarios.formUpdate');
+Route::post('propietarios/{pi}/editar', [PropietariosController::class, 'processUpdate'])
+    ->name('propietarios.processUpdate');

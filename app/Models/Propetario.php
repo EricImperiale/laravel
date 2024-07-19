@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\FormatearDatos;
 
 /**
- * 
+ *
  *
  * @property int $propietario_id
  * @property string $nombre
@@ -78,6 +78,7 @@ class Propetario extends Model
         'provincia',
         'barrio',
         'codigo_postal',
+        'codigo_de_area',
         'numero_de_telefono',
         'fecha_de_nacimiento',
         'pais',

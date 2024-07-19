@@ -25,8 +25,9 @@ return new class extends Migration
             $table->string('provincia', 255);
             $table->string('barrio', 255);
             $table->char('codigo_postal', 25);
+            $table->unsignedInteger('codigo_de_area');
             $table->string('numero_de_telefono', 50);
-            $table->dateTime('fecha_de_nacimiento');
+            $table->date('fecha_de_nacimiento');
             $table->timestamps();
         });
     }

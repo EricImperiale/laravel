@@ -32,7 +32,7 @@
                         <td>{{ $propietario->email }}</td>
                         <td>{{ $propietario->direccionCompleta }}</td>
                         <td class="d-flex gap-2">
-                            <a href="{{ route('propietarios.formUpdate', ['propietario_id' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('propietarios.formUpdate', ['pi' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
 
