@@ -28,21 +28,12 @@
                     <tr>
                         <td>{{ $propietario->nombreCompleto }}</td>
                         <td>{{ $propietario->dni }}</td>
-                        <td>{{ $propietario->numero_de_telefono }}</td>
+                        <td>{{ $propietario->telefonoCompleto }}</td>
                         <td>{{ $propietario->email }}</td>
                         <td>{{ $propietario->direccionCompleta }}</td>
                         <td class="d-flex gap-2">
-                            <a href="{{ route('propietarios.formUpdate', ['pi' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <form action="" method="post">
-                                @csrf
-
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash2-fill"></i>
-                                </button>
-                            </form>
+                            <a href="{{ route('propietarios.formUpdate', ['id' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ route('propietarios.formDelete', ['id' => $propietario->propietario_id]) }}" class="btn btn-outline-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 @empty

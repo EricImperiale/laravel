@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- *
+ * 
  *
  * @property int $prefijo_telefonico_id
  * @property string $prefijo
@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|PrefijoTelefonico wherePrefijo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PrefijoTelefonico wherePrefijoTelefonicoId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PrefijoTelefonico whereUpdatedAt($value)
+ * @property-read mixed $prefijos_telefonicos
  * @mixin \Eloquent
  */
 class PrefijoTelefonico extends Model

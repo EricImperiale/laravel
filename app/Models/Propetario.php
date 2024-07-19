@@ -53,6 +53,9 @@ use App\Traits\FormatearDatos;
  * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereUpdatedAt($value)
  * @property-read mixed $direccion_completa
  * @property-read mixed $nombre_completo
+ * @property int $codigo_de_area
+ * @property-read mixed $telefono_completo
+ * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereCodigoDeArea($value)
  * @mixin \Eloquent
  */
 class Propetario extends Model
@@ -81,7 +84,7 @@ class Propetario extends Model
         'codigo_de_area',
         'numero_de_telefono',
         'fecha_de_nacimiento',
-        'pais',
+        'prefijo_telefonico_fk_id',
     ];
 
     protected function nombreCompleto(): Attribute
@@ -95,6 +98,13 @@ class Propetario extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->direccion . ' ' . $this->altura . ', ' . $this->barrio . ', ' . $this->provincia,
+        );
+    }
+
+    protected function telefonoCompleto(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => '+' . $this->prefijoTelefonico->prefijo . ' ' . $this->codigo_de_area . ' ' . $this->numero_de_telefono,
         );
     }
 

@@ -21,6 +21,7 @@ class AuthController extends Controller
             return redirect()
                 ->route('auth.formLogin')
                 ->with('status.message', 'Las credenciales ingresadas no coinciden con nuestros registros.')
+                ->with('status.type', 'error')
                 ->withInput();
         }
 

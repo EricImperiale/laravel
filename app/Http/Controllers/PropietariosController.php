@@ -19,17 +19,17 @@ class PropietariosController extends Controller
         ]);
     }
 
-    public function formUpdate(int $pi)
+    public function formUpdate(int $id)
     {
         return view('propietarios.update-form', [
-            'propietario' => Propetario::findOrFail($pi),
+            'propietario' => Propetario::findOrFail($id),
             'prefijo_telefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
-    public function processUpdate(int $pi, UpdateRequest $request)
+    public function processUpdate(int $id, UpdateRequest $request)
     {
-        $propietario = Propetario::findOrFail($pi);
+        $propietario = Propetario::findOrFail($id);
 
         $data = $request->except(['_token']);
 
@@ -37,7 +37,7 @@ class PropietariosController extends Controller
             $propietario->update($data);
         } catch (Exception $e) {
             return redirect()
-                ->route('propietarios.formUpdate', ['pi' => $propietario->propietario_id])
+                ->route('propietarios.formUpdate', ['id' => $propietario->propietario_id])
                 ->withInput()
                 ->with('status.message', 'Ocurrió un error al actualizar la información. Por favor, probá de nuevo en un rato. Si el problema persiste, comunicate con nosotros.')
                 ->with('status.type', 'error');
@@ -46,5 +46,25 @@ class PropietariosController extends Controller
         return redirect()
             ->route('propietarios.index')
             ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> fue editado con éxito.');
+    }
+
+    public function formDelete(int $id)
+    {
+        return view('propietarios.delete-form', [
+            'id' => $id,
+            'propietario' => Propetario::findOrFail($id),
+            'prefijo_telefonicos' => PrefijoTelefonico::all(),
+        ]);
+    }
+
+    public function processDelete(int $id)
+    {
+        $propietario = Propetario::findOrFail($id);
+
+        $propietario->delete();
+
+        return redirect()
+            ->route('propietarios.index')
+            ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> fue eliminado con éxito.');
     }
 }
