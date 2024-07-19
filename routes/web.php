@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Propietarios\PropietariosController;
+use App\Http\Controllers\PropietariosController;
 
 Route::get('/', function () {
     return view('welcome');
