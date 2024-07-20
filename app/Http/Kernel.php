@@ -2,7 +2,11 @@
 
 namespace App\Http;
 
+<<<<<<< HEAD
 use App\Http\Middleware\VerificarAutenticacion;
+=======
+use App\Http\Middleware\VerificarMayoriaDeEdad;
+>>>>>>> 43e031ae15fa314ad1293c2c2685adffcfb00243
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -61,7 +65,15 @@ class Kernel extends HttpKernel
      *
      * @var array<string, class-string|string>
      */
+<<<<<<< HEAD
     protected $middlewareAliases = [
+=======
+    // Cuando vinculo un middleware deberia usar la clase pero aca tenemos los atajos.
+    // Estos van ordenador por orden alfavetioc.
+    protected $middlewareAliases = [
+        // Este de auth() es el que usabamos para auteneticar al usuario.
+        // ->middleware(['auth])
+>>>>>>> 43e031ae15fa314ad1293c2c2685adffcfb00243
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -72,6 +84,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+<<<<<<< HEAD
         'verificar-autenticacion' => VerificarAutenticacion::class,
+=======
+>>>>>>> 43e031ae15fa314ad1293c2c2685adffcfb00243
     ];
 }
