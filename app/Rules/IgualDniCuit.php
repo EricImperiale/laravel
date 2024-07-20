@@ -14,7 +14,6 @@ class IgualDniCuit implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        echo request()->input('dni');
         $dni = preg_replace('/[^0-9]/', '', request()->input('dni'));
         $cuit = preg_replace('/[^0-9]/', '', $value);
 

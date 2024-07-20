@@ -41,6 +41,7 @@ class UpdateRequest extends FormRequest
                 'numeric',
                 'digits:11',
                 Rule::unique('propietarios')->ignore($id, 'propietario_id'),
+                new IgualDniCuit,
             ],
             'email' => [
                 'required',
