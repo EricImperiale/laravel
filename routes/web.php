@@ -17,13 +17,10 @@ Route::post('cerrar-sesion', [AuthController::class, 'processLogout'])
 
 Route::get('propietarios', [PropietariosController::class, 'index'])
     ->name('propietarios.index');
-<<<<<<< HEAD
 Route::get('propietarios/crear', [PropietariosController::class, 'formCreate'])
     ->name('propietarios.formCreate');
 Route::post('propietarios/crear', [PropietariosController::class, 'processCreate'])
     ->name('propietarios.processCreate');
-=======
->>>>>>> 43e031ae15fa314ad1293c2c2685adffcfb00243
 Route::get('propietarios/{id}/editar', [PropietariosController::class, 'formUpdate'])
     ->name('propietarios.formUpdate');
 Route::post('propietarios/{id}/editar', [PropietariosController::class, 'processUpdate'])

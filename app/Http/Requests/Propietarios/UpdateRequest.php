@@ -4,6 +4,7 @@ namespace App\Http\Requests\Propietarios;
 
 use App\Rules\IgualDniCuit;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
@@ -14,7 +15,7 @@ class UpdateRequest extends FormRequest
     public function authorize(): bool
     {
         // TODO: Permitir que solo usuario autenticado.
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -24,31 +25,36 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $propietario_id = $this->route('pi');
+        $id = request()->id;
 
         return [
-            'nombre' => 'required',
-            'apellido' => 'required',
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
             'dni' => [
                 'required',
                 'numeric',
                 'digits:8',
+                Rule::unique('propietarios')->ignore($id, 'propietario_id'),
             ],
             'cuit' => [
                 'required',
                 'numeric',
                 'digits:11',
+                Rule::unique('propietarios')->ignore($id, 'propietario_id'),
             ],
-            'email' => 'required',
-            'direccion' => 'required',
-            'cuidad' => 'required',
-            'pais' => 'required',
-            'provincia' => 'required',
-            'barrio' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('propietarios')->ignore($id, 'propietario_id')
+            ],
+            'direccion' => 'required|string|max:255',
+            'cuidad' => 'required|string|max:255',
+            'pais' => 'required|string|max:255',
+            'provincia' => 'required|string|max:255',
+            'barrio' => 'required|string|max:255',
             'codigo_postal' => 'required|numeric',
-            'prefijo_telefonico_fk_id' => 'required',
-            'codigo_de_area' => 'required',
-            'numero_de_telefono' => 'required',
+            'prefijo_telefonico_fk_id' => 'required|numeric',
+            'codigo_de_area' => 'required|numeric',
+            'numero_de_telefono' => 'required|numeric',
             'fecha_de_nacimiento' => [
                 'required',
                 'date',

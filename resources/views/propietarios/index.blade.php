@@ -9,11 +9,7 @@
     <section>
         <header class="mb-3">
             <h2>Propietarios</h2>
-<<<<<<< HEAD
-
             <a href="{{ route('propietarios.formCreate') }}">Crear Propietario</a>
-=======
->>>>>>> 43e031ae15fa314ad1293c2c2685adffcfb00243
         </header>
 
         <div class="table-responsive">
