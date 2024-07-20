@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Propietarios;
 
+use App\Rules\IgualDniCuit;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
@@ -12,7 +14,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -36,6 +38,7 @@ class CreateRequest extends FormRequest
                 'numeric',
                 'digits:11',
                 'unique:propietarios,cuit',
+                new IgualDniCuit,
             ],
             'email' => 'required|email|unique:propietarios,email',
             'direccion' => 'required',

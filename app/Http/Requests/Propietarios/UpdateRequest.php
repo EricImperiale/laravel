@@ -14,7 +14,6 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO: Permitir que solo usuario autenticado.
         return Auth::check();
     }
 

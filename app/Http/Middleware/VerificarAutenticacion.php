@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class VerificarAutenticacion
@@ -15,6 +16,13 @@ class VerificarAutenticacion
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!Auth::check()) {
+            return redirect()
+                ->route('auth.formLogin')
+                ->with('status.message', 'Tenés que iniciar sesión para ver está sección.')
+                ->with('status.type', 'error');
+        }
+
         return $next($request);
     }
 }
