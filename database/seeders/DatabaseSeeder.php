@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PrefijoTelefonicoSeeder::class);
         $this->call(PropietarioSeeder::class);
         $this->call(TipoDePropiedadSeeder::class);
+        $this->call(EstadoDePropiedadSeeder::class);
         $this->call(PropiedadesSeeder::class);
     }
 }

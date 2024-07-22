@@ -37,6 +37,7 @@ class PropiedadesSeeder extends Seeder
                 'banios' => 2,
                 'tdp_fk_id' => 1,
                 'propietario_fk_id' => 3,
+                'estado_fk_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -63,6 +64,7 @@ class PropiedadesSeeder extends Seeder
                 'banios' => 1,
                 'tdp_fk_id' => 2,
                 'propietario_fk_id' => 1,
+                'estado_fk_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -89,6 +91,7 @@ class PropiedadesSeeder extends Seeder
                 'banios' => 2,
                 'tdp_fk_id' => 3,
                 'propietario_fk_id' => 2,
+                'estado_fk_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

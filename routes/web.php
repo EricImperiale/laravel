@@ -23,7 +23,8 @@ Route::post('cerrar-sesion', [AuthController::class, 'processLogout'])
     ->middleware(VerificarAutenticacion::class);
 
 Route::get('propiedades', [PropiedadesController::class, 'index'])
-    ->name('propiedades.index');
+    ->name('propiedades.index')
+    ->middleware(VerificarAutenticacion::class);;
 
 Route::get('propietarios', [PropietariosController::class, 'index'])
     ->name('propietarios.index')

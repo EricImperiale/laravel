@@ -2,13 +2,76 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ *
+ *
+ * @property int $propiedad_id
+ * @property string $direccion
+ * @property int $altura
+ * @property string $departamento
+ * @property string $cuidad
+ * @property string $provincia
+ * @property string $barrio
+ * @property int $codigo_postal
+ * @property int $area_total
+ * @property int $area_cubierta
+ * @property string|null $descripcion
+ * @property int $precio_del_alquiler
+ * @property int $expensas
+ * @property int $piso
+ * @property int $numero_de_departamento
+ * @property int $es_uso_profesional
+ * @property int $es_interno
+ * @property int $antiguedad
+ * @property int $ambientes
+ * @property int|null $cuartos
+ * @property int|null $banios
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $tdp_fk_id
+ * @property int $propietario_fk_id
+ * @property-read \App\Models\Propetario $propietario
+ * @property-read \App\Models\TipoDePropiedad $tipoDePropiedad
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAltura($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAmbientes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAntiguedad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAreaCubierta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAreaTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereBanios($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereBarrio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCodigoPostal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCuartos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCuidad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereDepartamento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereDireccion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereEsInterno($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereEsUsoProfesional($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereExpensas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereNumeroDeDepartamento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePiso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePrecioDelAlquiler($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePropiedadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePropietarioFkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereProvincia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereTdpFkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Propiedad extends Model
 {
     //use HasFactory;
+
+    protected $table = 'propiedades';
 
     protected $primaryKey = 'propiedad_id';
 
@@ -37,6 +100,19 @@ class Propiedad extends Model
         'tdp_fk_id',
         'propietario_fk_id',
     ];
+
+    protected function direccionCompleta(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->tdp_fk_id === 2) {
+                    return $this->direccion . ' ' . $this->altura . ', ' . $this->piso . $this->numero_de_departamento . ', ' . $this->barrio . ', ' . $this->provincia;
+                }
+
+                return $this->direccion . ' ' . $this->altura . ', ' . $this->barrio . ', ' . $this->provincia;
+            }
+        );
+    }
 
     public function tipoDePropiedad(): BelongsTo
     {
