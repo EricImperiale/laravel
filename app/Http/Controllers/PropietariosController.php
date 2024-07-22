@@ -58,11 +58,11 @@ class PropietariosController extends Controller
 
     public function processUpdate(int $id, UpdateRequest $request)
     {
-        $propietario = Propietario::findOrFail($id);
-
         $data = $request->except(['_token']);
 
         try {
+            $propietario = Propietario::findOrFail($id);
+
             $propietario->update($data);
         } catch (Exception $e) {
             return redirect()
@@ -94,9 +94,12 @@ class PropietariosController extends Controller
             $propietario = Propietario::findOrFail($id);
 
             if ($propietario->propiedades()->exists()) {
+                DB::rollBack();
+                
                 return redirect()
                     ->route('propietarios.index')
-                    ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> no puede ser eliminado porque tiene una propiedad y/o contrato activo.');
+                    ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> no puede ser eliminado porque tiene una o más propiedades asociadas.')
+                    ->with('status.type', 'error');
             }
 
             $propietario->delete();
