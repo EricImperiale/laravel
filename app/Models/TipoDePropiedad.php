@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoDePropiedad extends Model
 {
-    use HasFactory;
+    //use HasFactory;
+
+    protected $primaryKey = 'tdp_id';
+
+    protected $fillable = [
+        'tdp_id',
+        'tipo_de_propiedad',
+    ];
 }

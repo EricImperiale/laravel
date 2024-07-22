@@ -12,6 +12,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', [AuthController::class, 'formLogin'])
+    ->name('auth.formLogin');
 Route::get('iniciar-sesion', [AuthController::class, 'formLogin'])
     ->name('auth.formLogin');
 Route::post('iniciar-sesion', [AuthController::class, 'processLogin'])

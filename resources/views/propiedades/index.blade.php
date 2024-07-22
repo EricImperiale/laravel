@@ -1,6 +1,3 @@
-<?php
-/** @var \App\Models\Propetario[]|\Illuminate\Database\Eloquent\Collection $propietarios */
-?>
 @extends('app')
 
 @section('title', 'Tus Propiedades')

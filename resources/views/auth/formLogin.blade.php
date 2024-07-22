@@ -21,7 +21,7 @@
             <input type="text" id="email" name="email" class="form-control" value="{{ old('email') ?? null }}">
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
             <label for="password" class="form-label">Contraseña</label>
             @error('password')
                 <div class="alert alert-danger" role="alert">
