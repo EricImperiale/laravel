@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\FormatearDatos;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -65,11 +66,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereProvincia($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereTdpFkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereUpdatedAt($value)
+ * @property int $estado_fk_id
+ * @property-read mixed $direccion_completa
+ * @property-read \App\Models\EstadoDePropiedad $estado
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereEstadoFkId($value)
  * @mixin \Eloquent
  */
 class Propiedad extends Model
 {
     //use HasFactory;
+
+    use FormatearDatos;
 
     protected $table = 'propiedades';
 
@@ -99,6 +106,7 @@ class Propiedad extends Model
         'banios',
         'tdp_fk_id',
         'propietario_fk_id',
+        'estado_fk_id',
     ];
 
     protected function direccionCompleta(): Attribute
@@ -106,10 +114,41 @@ class Propiedad extends Model
         return Attribute::make(
             get: function () {
                 if ($this->tdp_fk_id === 2) {
-                    return $this->direccion . ' ' . $this->altura . ', ' . $this->piso . $this->numero_de_departamento . ', ' . $this->barrio . ', ' . $this->provincia;
+                    return $this->tipoDePropiedad->tipo_de_propiedad . ', ' . $this->direccion . ' ' . $this->altura . ', ' . $this->piso . $this->numero_de_departamento . ', ' . $this->barrio . ', ' . $this->provincia;
                 }
 
-                return $this->direccion . ' ' . $this->altura . ', ' . $this->barrio . ', ' . $this->provincia;
+                return  $this->tipoDePropiedad->tipo_de_propiedad . ', ' . $this->direccion . ' ' . $this->altura . ', ' . $this->barrio . ', ' . $this->provincia;
+            }
+        );
+    }
+
+    protected function alquiler(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->tdp_fk_id === 2) {
+                    return $this->formatearPrecios($this->precio_del_alquiler, $this->expensas);
+                }
+
+                return $this->formatearPrecios($this->precio_del_alquiler, '');
+            }
+        );
+    }
+
+    protected function superfice(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->area_cubierta . ' m2';
+            }
+        );
+    }
+
+    protected function caracteristicas(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->ambientes;
             }
         );
     }
@@ -129,6 +168,15 @@ class Propiedad extends Model
             Propetario::class,
             'propietario_fk_id',
             'propietario_id',
+        );
+    }
+
+    public function estado(): BelongsTo
+    {
+        return $this->belongsTo(
+            EstadoDePropiedad::class,
+            'estado_fk_id',
+            'estado_id',
         );
     }
 }

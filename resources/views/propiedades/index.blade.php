@@ -1,6 +1,5 @@
 <?php
 /** @var \App\Models\Propiedad[]|\Illuminate\Database\Eloquent\Collection $propiedades */
-/** @var \App\Models\TipoDePropiedad[]|\Illuminate\Database\Eloquent\Collection $tipoDePropiedades */
 ?>
 @extends('app')
 
@@ -25,15 +24,29 @@
                 <thead class="table-dark">
                 <tr>
                     <th scope="col">Dirección</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Tipo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Caracteristicas</th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($propiedades as $propiedad)
                     <tr>
                         <td>{{ $propiedad->direccionCompleta }}</td>
-                        <td>{{ $propiedad->tipoDePropiedad->tipo_de_propiedad }}</td>
+                        <td>
+                            <span class="badge text-bg-{{ $propiedad->estado->estado_id == 1 ? 'success' : 'warning' }}">
+                                {{ $propiedad->estado->estado }}
+                            </span>
+                        </td>
+                        <td>{{ $propiedad->alquiler }}</td>
+                        <td>{{ $propiedad->superfice }} con {{ $propiedad->ambientes }} ambientes</td>
+                        <td>{{ $propiedad->propietario->nombreCompleto }}</td>
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                        </td>
                     </tr>
                 @empty
                     <p class="text-muted">Aún no hay propiedades cargadas en el sistema.</p>
