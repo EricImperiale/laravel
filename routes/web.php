@@ -2,10 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\PropiedadesController;
 use App\Http\Controllers\PropietariosController;
-
-// Middlewares
 use App\Http\Middleware\VerificarAutenticacion;
 
 Route::get('/', function () {
@@ -21,10 +18,6 @@ Route::post('iniciar-sesion', [AuthController::class, 'processLogin'])
 Route::post('cerrar-sesion', [AuthController::class, 'processLogout'])
     ->name('auth.processLogout')
     ->middleware(VerificarAutenticacion::class);
-
-Route::get('propiedades', [PropiedadesController::class, 'index'])
-    ->name('propiedades.index')
-    ->middleware(VerificarAutenticacion::class);;
 
 Route::get('propietarios', [PropietariosController::class, 'index'])
     ->name('propietarios.index')

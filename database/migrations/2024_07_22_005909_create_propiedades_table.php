@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('propiedad_id');
             $table->string('direccion', 125);
             $table->unsignedInteger('altura');
-            $table->string('departamento', 5);
             $table->string('cuidad', 150);
             $table->string('provincia', 150);
             $table->string('barrio', 150);
@@ -27,8 +26,8 @@ return new class extends Migration
             $table->unsignedInteger('expensas')->default(0);
             $table->unsignedInteger('piso')->default(0);
             $table->unsignedInteger('numero_de_departamento')->default(0);
-            $table->boolean('es_uso_profesional')->default(false);
-            $table->boolean('es_interno')->default(false);
+            $table->boolean('es_uso_profesional')->nullable()->default(false);
+            $table->boolean('es_interno')->nullable()->default(false);
             $table->unsignedInteger('antiguedad');
             $table->unsignedInteger('ambientes');
             $table->unsignedInteger('cuartos')->nullable();

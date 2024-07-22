@@ -1,5 +1,5 @@
 <?php
-/** @var \App\Models\Propetario[]|\Illuminate\Database\Eloquent\Collection $propietarios */
+/** @var \App\Models\Propietario[]|\Illuminate\Database\Eloquent\Collection $propietarios */
 ?>
 @extends('app')
 

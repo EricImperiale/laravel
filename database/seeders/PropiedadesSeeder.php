@@ -17,7 +17,6 @@ class PropiedadesSeeder extends Seeder
             [
                 'direccion' => 'Calle Falsa',
                 'altura' => 1234,
-                'departamento' => '',
                 'cuidad' => 'Buenos Aires',
                 'provincia' => 'Buenos Aires',
                 'barrio' => 'Palermo',
@@ -44,7 +43,6 @@ class PropiedadesSeeder extends Seeder
             [
                 'direccion' => 'Avenida Siempre Viva',
                 'altura' => 742,
-                'departamento' => 'A',
                 'cuidad' => 'Buenos Aires',
                 'provincia' => 'Buenos Aires',
                 'barrio' => 'Recoleta',
@@ -71,7 +69,6 @@ class PropiedadesSeeder extends Seeder
             [
                 'direccion' => 'Calle San Martín',
                 'altura' => 5678,
-                'departamento' => '',
                 'cuidad' => 'Buenos Aires',
                 'provincia' => 'Buenos Aires',
                 'barrio' => 'Belgrano',

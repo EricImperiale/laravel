@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Propietarios\CreateRequest;
 use App\Http\Requests\Propietarios\UpdateRequest;
 use App\Models\PrefijoTelefonico;
-use App\Models\Propetario;
+use App\Models\Propietario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
@@ -14,7 +14,7 @@ class PropietariosController extends Controller
 {
     public function index()
     {
-        $propietarios = Propetario::with(['prefijoTelefonico'])->paginate(2);
+        $propietarios = Propietario::with(['prefijoTelefonico'])->paginate(2);
 
         return view('propietarios.index', [
             'propietarios' => $propietarios,
@@ -33,7 +33,7 @@ class PropietariosController extends Controller
         $data = $request->except(['_token']);
 
         try {
-            $propietario = Propetario::create($data);
+            $propietario = Propietario::create($data);
         } catch (Exception $e) {
             return redirect()
                 ->route('propietarios.index')
@@ -51,14 +51,14 @@ class PropietariosController extends Controller
     public function formUpdate(int $id)
     {
         return view('propietarios.update-form', [
-            'propietario' => Propetario::findOrFail($id),
+            'propietario' => Propietario::findOrFail($id),
             'prefijo_telefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
     public function processUpdate(int $id, UpdateRequest $request)
     {
-        $propietario = Propetario::findOrFail($id);
+        $propietario = Propietario::findOrFail($id);
 
         $data = $request->except(['_token']);
 
@@ -81,16 +81,34 @@ class PropietariosController extends Controller
     {
         return view('propietarios.delete-form', [
             'id' => $id,
-            'propietario' => Propetario::findOrFail($id),
+            'propietario' => Propietario::findOrFail($id),
             'prefijo_telefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
     public function processDelete(int $id)
     {
-        $propietario = Propetario::findOrFail($id);
+        DB::beginTransaction();
 
-        $propietario->delete();
+        try {
+            $propietario = Propietario::findOrFail($id);
+
+            if ($propietario->propiedades()->exists()) {
+                return redirect()
+                    ->route('propietarios.index')
+                    ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> no puede ser eliminado porque tiene una propiedad y/o contrato activo.');
+            }
+
+            $propietario->delete();
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->route('propietarios.index')
+                ->with('status.message', 'Error al eliminar al propietario <b>' . e($propietario->nombreCompleto) . '</b>. ' . $e->getMessage());
+        }
 
         return redirect()
             ->route('propietarios.index')

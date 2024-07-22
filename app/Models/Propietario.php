@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\FormatearDatos;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * 
+ *
  *
  * @property int $propietario_id
  * @property string $nombre
@@ -30,35 +31,35 @@ use App\Traits\FormatearDatos;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $prefijo_telefonico_fk_id
  * @property-read \App\Models\PrefijoTelefonico $prefijoTelefonico
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario query()
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereAltura($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereApellido($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereBarrio($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereCodigoPostal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereCuidad($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereCuit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereDireccion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereDni($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereFechaDeNacimiento($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereNombre($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereNumeroDeTelefono($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario wherePais($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario wherePrefijoTelefonicoFkId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario wherePropietarioId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereProvincia($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereAltura($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereApellido($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereBarrio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereCodigoPostal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereCuidad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereCuit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereDireccion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereDni($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereFechaDeNacimiento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereNumeroDeTelefono($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario wherePais($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario wherePrefijoTelefonicoFkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario wherePropietarioId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereProvincia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereUpdatedAt($value)
  * @property-read mixed $direccion_completa
  * @property-read mixed $nombre_completo
  * @property int $codigo_de_area
  * @property-read mixed $telefono_completo
- * @method static \Illuminate\Database\Eloquent\Builder|Propetario whereCodigoDeArea($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereCodigoDeArea($value)
  * @mixin \Eloquent
  */
-class Propetario extends Model
+class Propietario extends Model
 {
     //use HasFactory;
 
@@ -128,6 +129,14 @@ class Propetario extends Model
             PrefijoTelefonico::class,
             'prefijo_telefonico_fk_id',
             'prefijo_telefonico_id'
+        );
+    }
+
+    public function propiedades()
+    {
+        return $this->hasMany(
+            Propiedad::class,
+            'propietario_fk_id',
         );
     }
 }
