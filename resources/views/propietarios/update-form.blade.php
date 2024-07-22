@@ -10,6 +10,16 @@
 @section('main')
     <section>
         <header>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Propietarios</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a href="{{ route('propietarios.index') }}">Tus Propietarios</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar Propietario</li>
+                </ol>
+            </nav>
+
             <h2>Estás editando a: <b>{{ $propietario->nombreCompleto }}</b> con DNI <b>{{ $propietario->dni }}</b></h2>
         </header>
 

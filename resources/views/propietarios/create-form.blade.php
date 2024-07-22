@@ -8,6 +8,16 @@
 @section('main')
     <section>
         <header>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Propietarios</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a href="{{ route('propietarios.index') }}">Tus Propietarios</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear Propietario</li>
+                </ol>
+            </nav>
+
             <h2>Crear Propietario</h2>
         </header>
 

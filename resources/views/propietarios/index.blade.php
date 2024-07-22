@@ -8,6 +8,13 @@
 @section('main')
     <section>
         <header class="mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Propietarios</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tus Propietarios</li>
+                </ol>
+            </nav>
+
             <h2>Propietarios</h2>
             <a href="{{ route('propietarios.formCreate') }}">Crear Propietario</a>
         </header>

@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('propietarios', function (Blueprint $table) {
             $table->id('propietario_id');
-            $table->string('nombre', 255);
-            $table->string('apellido', 255);
+            $table->string('nombre', 150);
+            $table->string('apellido', 150);
             $table->unsignedInteger('dni');
             $table->unsignedInteger('cuit');
             $table->string('email', 255)->unique();
-            $table->string('direccion', 255);
+            $table->string('direccion', 150);
             $table->unsignedInteger('altura');
-            $table->string('cuidad', 255);
-            $table->string('pais', 255);
-            $table->string('provincia', 255);
-            $table->string('barrio', 255);
-            $table->char('codigo_postal', 25);
+            $table->string('cuidad', 150);
+            $table->string('pais', 150);
+            $table->string('provincia', 150);
+            $table->string('barrio', 150);
+            $table->unsignedInteger('codigo_postal');
             $table->unsignedInteger('codigo_de_area');
             $table->string('numero_de_telefono', 50);
             $table->date('fecha_de_nacimiento');
