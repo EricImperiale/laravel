@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $prefijo_telefonico_id
  * @property string $prefijo
@@ -30,6 +30,8 @@ class PrefijoTelefonico extends Model
     //use HasFactory;
 
     protected $primaryKey = 'prefijo_telefonico_id';
+
+    protected $table = 'prefijo_telefonicos';
 
     protected function prefijosTelefonicos(): Attribute
     {

@@ -14,9 +14,9 @@ class Propiedad extends Model
 
     use FormatearDatos;
 
-    protected $table = 'propiedades';
-
     protected $primaryKey = 'propiedad_id';
+
+    protected $table = 'propiedades';
 
     protected $fillable = [
         'propiedad_id',

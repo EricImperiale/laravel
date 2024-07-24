@@ -6,25 +6,47 @@ use App\Http\Requests\Propietarios\CreateRequest;
 use App\Http\Requests\Propietarios\UpdateRequest;
 use App\Models\PrefijoTelefonico;
 use App\Models\Propietario;
+use App\Repositories\PropietariosEloquentRepository;
+use App\Searches\FiltrosPropietario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
 class PropietariosController extends Controller
 {
-    public function index()
+    protected PropietariosEloquentRepository $repo;
+
+    public function __construct(PropietariosEloquentRepository $repo)
     {
-        $propietarios = Propietario::with(['prefijoTelefonico'])->paginate(2);
+        $this->repo = $repo;
+    }
+
+    public function index(Request $request)
+    {
+        //$propietarios = Propietario::with(['prefijoTelefonico'])->paginate(2);
+
+        $searchParams = new FiltrosPropietario(
+            nombreCompleto: $request->query('nc'),
+        );
+
+        $builder = $this->repo->withRelations(['prefijoTelefonico']);
+        // TODO: Ver que busque por nombre completo.
+        if ($searchParams->getNombreCompleto()) {
+            $builder->where('apellido', 'LIKE', '%' . $searchParams->getNombreCompleto() . '%');
+        }
+
+        $propietarios = $builder->paginate(2);
 
         return view('propietarios.index', [
             'propietarios' => $propietarios,
+            'filtrosPropietario' => $searchParams,
         ]);
     }
 
     public function formCreate()
     {
         return view('propietarios.create-form', [
-            'prefijo_telefonicos' => PrefijoTelefonico::all(),
+            'prefijosTelefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
@@ -52,7 +74,7 @@ class PropietariosController extends Controller
     {
         return view('propietarios.update-form', [
             'propietario' => Propietario::findOrFail($id),
-            'prefijo_telefonicos' => PrefijoTelefonico::all(),
+            'prefijosTelefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
@@ -82,7 +104,7 @@ class PropietariosController extends Controller
         return view('propietarios.delete-form', [
             'id' => $id,
             'propietario' => Propietario::findOrFail($id),
-            'prefijo_telefonicos' => PrefijoTelefonico::all(),
+            'prefijosTelefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
@@ -95,11 +117,10 @@ class PropietariosController extends Controller
 
             if ($propietario->propiedades()->exists()) {
                 DB::rollBack();
-                
+
                 return redirect()
                     ->route('propietarios.index')
-                    ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> no puede ser eliminado porque tiene una o más propiedades asociadas.')
-                    ->with('status.type', 'error');
+                    ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> no puede ser eliminado porque tiene una o más propiedades o contratos activos.')                    ->with('status.type', 'error');
             }
 
             $propietario->delete();

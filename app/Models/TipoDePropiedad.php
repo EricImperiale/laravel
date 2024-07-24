@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $tdp_id
  * @property string $tipo_de_propiedad
@@ -24,8 +24,6 @@ use Illuminate\Database\Eloquent\Model;
 class TipoDePropiedad extends Model
 {
     //use HasFactory;
-
-    protected $table = 'tipo_de_propiedades';
 
     protected $primaryKey = 'tdp_id';
 

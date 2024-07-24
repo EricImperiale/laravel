@@ -65,8 +65,6 @@ class Propietario extends Model
 
     use FormatearDatos;
 
-    protected $table = 'propietarios';
-
     protected $primaryKey = 'propietario_id';
 
     protected $fillable = [

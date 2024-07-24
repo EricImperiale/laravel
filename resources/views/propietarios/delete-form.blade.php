@@ -1,6 +1,6 @@
 <?php
 /** @var \App\Models\Propietario $propietario */
-/** @var \App\Models\PrefijoTelefonico[]|\Illuminate\Database\Eloquent\Collection $prefijo_telefonicos */
+/** @var \App\Models\PrefijoTelefonico[]|\Illuminate\Database\Eloquent\Collection $prefijosTelefonicos */
 
 ?>
 @extends('app')
@@ -173,9 +173,9 @@
                         <label for="prefijo_telefonico_fk_id" class="form-label">Prefijo teléfonico</label>
                         <select name="prefijo_telefonico_fk_id" id="prefijo_telefonico_fk_id" class="form-control"
                                 disabled>
-                            @foreach($prefijo_telefonicos as $pt)
-                                <option value="{{ $pt->prefijo_telefonico_id }}">
-                                    {{ $pt->prefijosTelefonicos }}
+                            @foreach($prefijosTelefonicos as $prefijo)
+                                <option value="{{ $prefijo->prefijo_telefonico_id }}">
+                                    {{ $prefijo->prefijosTelefonicos }}
                                 </option>
                             @endforeach
                         </select>
