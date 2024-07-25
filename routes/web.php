@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PropietariosController;
 use App\Http\Middleware\VerificarAutenticacion;
 use App\Http\Controllers\InquilinoController;
+use App\Http\Controllers\ContratoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,4 +66,8 @@ Route::post('inquilinos/{id}/eliminar', [InquilinoController::class, 'processDel
     ->middleware(VerificarAutenticacion::class);
 Route::get('inquilinos/{id}/contratos', [InquilinoController::class, 'viewContract'])
     ->name('inquilinos.viewContract')
+    ->middleware(VerificarAutenticacion::class);
+
+Route::get('contratos', [ContratoController::class, 'index'])
+    ->name('contratos.index')
     ->middleware(VerificarAutenticacion::class);

@@ -15,7 +15,7 @@
                 </ol>
             </nav>
 
-            <h2>Propietarios</h2>
+            <h2 class="mb-2">Propietarios</h2>
             <a href="{{ route('propietarios.formCreate') }}">Crear Propietario</a>
 
             <form action="{{ route('propietarios.index') }}" method="get" class="my-3">

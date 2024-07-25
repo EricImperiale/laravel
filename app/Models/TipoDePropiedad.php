@@ -27,6 +27,8 @@ class TipoDePropiedad extends Model
 
     protected $primaryKey = 'tdp_id';
 
+    protected $table = 'tipo_de_propiedades';
+
     protected $fillable = [
         'tdp_id',
         'tipo_de_propiedad',

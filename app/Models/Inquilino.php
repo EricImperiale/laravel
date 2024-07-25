@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $inquilino_id
  * @property string $nombre
@@ -54,6 +54,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Inquilino wherePrefijoTelefonicoFkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Inquilino whereProvincia($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Inquilino whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contrato> $contratos
+ * @property-read int|null $contratos_count
+ * @property-read mixed $direccion_completa
+ * @property-read mixed $nombre_completo
+ * @property-read mixed $telefono_completo
  * @mixin \Eloquent
  */
 class Inquilino extends Model

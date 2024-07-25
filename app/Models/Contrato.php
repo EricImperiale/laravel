@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\FormatearDatos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
- * 
+ *
  *
  * @property int $contrato_id
  * @property int $precio_del_alquiler
@@ -31,21 +32,47 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Contrato wherePrecioDelAlquiler($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contrato wherePropietarioFkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contrato whereUpdatedAt($value)
+ * @property-read \App\Models\Inquilino $inquilino
+ * @property int $propiedad_fk_id
+ * @property-read \App\Models\Propiedad $propiedad
+ * @method static \Illuminate\Database\Eloquent\Builder|Contrato wherePropiedadFkId($value)
+ * @property-read mixed $calcular_diferencia
  * @mixin \Eloquent
  */
 class Contrato extends Model
 {
     //use HasFactory;
 
+    use FormatearDatos;
+
     protected $primaryKey = 'contrato_id';
 
     protected $fillable = [
         'contrato_id',
         'precio_del_alquiler',
+        'fecha_de_contrato',
         'fecha_de_comienzo',
         'fecha_de_final',
         'fecha_de_vencimiento',
+        'propietario_fk_id',
+        'inquilino_fk_id',
     ];
+
+    protected function calcularDistancia(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->calcularDistanciaEntreFechas($this->fecha_de_comienzo, $this->fecha_de_final),
+        );
+    }
+
+    public function propiedad(): BelongsTo
+    {
+        return $this->belongsTo(
+            Propiedad::class,
+            'propiedad_fk_id',
+            'propiedad_id',
+        );
+    }
 
     public function propietario(): BelongsTo
     {
@@ -53,6 +80,15 @@ class Contrato extends Model
             Propietario::class,
             'propietario_fk_id',
             'propietario_id',
+        );
+    }
+
+    public function inquilino(): BelongsTo
+    {
+        return $this->belongsTo(
+            Inquilino::class,
+            'inquilino_fk_id',
+            'inquilino_id',
         );
     }
 }

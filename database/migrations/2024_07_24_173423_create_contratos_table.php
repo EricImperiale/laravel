@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->id('contrato_id');
-            $table->unsignedInteger('precio_del_alquiler');
+            $table->date('fecha_de_contrato');
             $table->date('fecha_de_comienzo');
             $table->date('fecha_de_final');
+            $table->unsignedInteger('precio_del_alquiler');
             $table->unsignedInteger('fecha_de_vencimiento');
             $table->timestamps();
         });

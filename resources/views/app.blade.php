@@ -29,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('inquilinos*') ? 'active' : '' }}" href="{{ route('inquilinos.index') }}">Inquilinos</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('contratos*') ? 'active' : '' }}" href="{{ route('contratos.index') }}">Contratos</a>
+                        </li>
                     </ul>
                     @auth
                         <ul class="navbar-nav">

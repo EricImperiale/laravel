@@ -25,11 +25,11 @@
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                @error('nombre')
-                    <div class="alert alert-danger" role="alert">
-                        {{ $message }}
-                    </div>
-                @enderror
+                    @error('nombre')
+                        <div class="alert alert-danger" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 <input type="text" id="nombre" name="nombre" class="form-control" value="{{ old('nombre') }}">
             </div>
 
