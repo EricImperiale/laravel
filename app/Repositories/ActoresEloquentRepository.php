@@ -3,19 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Propietario;
-use App\Repositories\Interfaces\PropietarioRepository;
+use App\Repositories\Interfaces\ActoresRepository;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
-class PropietariosEloquentRepository implements PropietarioRepository
+class ActoresEloquentRepository implements ActoresRepository
 {
-    private Propietario $propietario;
     private Builder $builder;
+    private $modelClass;
 
-    public function __construct()
+    public function __construct($modelClass)
     {
-        $this->propietario = new Propietario;
-        $this->builder = $this->propietario->query();
+        $this->modelClass = $modelClass;
+        $this->builder = (new $modelClass)->newQuery();
     }
 
     public function all()
@@ -47,24 +47,26 @@ class PropietariosEloquentRepository implements PropietarioRepository
 
     public function findOrFail(int $id)
     {
-        return Propietario::findOrFail($id);
+        return $this->modelClass::findOrFail($id);
     }
 
     public function create(array $data)
     {
-        DB::transaction(function() use ($data) {
-            $movie = Propietario::create($data);
-            $movie->genres()->attach($data['genre_id'] ?? []);
+        return DB::transaction(function() use ($data) {
+            $model = new $this->modelClass;
+            return $model->create($data);
         });
     }
 
     public function update(int $id, array $data)
     {
-        return Propietario::findOrFail($id)->update($data);
+        $modelInstance = $this->modelClass::findOrFail($id);
+        $modelInstance->update($data);
+        return $modelInstance;
     }
 
     public function delete(int $id)
     {
-        return Propietario::findOrFail($id)->delete();
+        return $this->modelClass::findOrFail($id)->delete();
     }
 }

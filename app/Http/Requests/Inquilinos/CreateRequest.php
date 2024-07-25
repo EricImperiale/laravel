@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Propietarios;
+namespace App\Http\Requests\Inquilinos;
 
 use App\Rules\IgualDniCuit;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
 {
@@ -31,16 +30,16 @@ class CreateRequest extends FormRequest
                 'required',
                 'numeric',
                 'digits:8',
-                'unique:propietarios,dni',
+                'unique:inquilinos,dni',
             ],
             'cuit' => [
                 'required',
                 'numeric',
                 'digits:11',
-                'unique:propietarios,cuit',
+                'unique:inquilinos,cuit',
                 new IgualDniCuit,
             ],
-            'email' => 'required|email|unique:propietarios,email',
+            'email' => 'required|email|unique:inquilinos,email',
             'direccion' => 'required',
             'cuidad' => 'required',
             'pais' => 'required',

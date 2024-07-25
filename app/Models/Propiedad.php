@@ -8,6 +8,71 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * 
+ *
+ * @property int $propiedad_id
+ * @property string $direccion
+ * @property int $altura
+ * @property string $cuidad
+ * @property string $provincia
+ * @property string $barrio
+ * @property int $codigo_postal
+ * @property int $area_total
+ * @property int $area_cubierta
+ * @property string|null $descripcion
+ * @property int $precio_del_alquiler
+ * @property int $expensas
+ * @property int $piso
+ * @property int $numero_de_departamento
+ * @property int|null $es_uso_profesional
+ * @property int|null $es_interno
+ * @property int $antiguedad
+ * @property int $ambientes
+ * @property int|null $cuartos
+ * @property int|null $banios
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $tdp_fk_id
+ * @property int $propietario_fk_id
+ * @property int $estado_fk_id
+ * @property-read mixed $alquiler
+ * @property-read mixed $caracteristicas
+ * @property-read mixed $direccion_completa
+ * @property-read \App\Models\EstadoDePropiedad $estado
+ * @property-read \App\Models\Propietario $propietario
+ * @property-read mixed $superfice
+ * @property-read \App\Models\TipoDePropiedad $tipoDePropiedad
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAltura($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAmbientes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAntiguedad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAreaCubierta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereAreaTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereBanios($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereBarrio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCodigoPostal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCuartos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereCuidad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereDireccion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereEsInterno($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereEsUsoProfesional($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereEstadoFkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereExpensas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereNumeroDeDepartamento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePiso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePrecioDelAlquiler($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePropiedadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad wherePropietarioFkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereProvincia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereTdpFkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Propiedad whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Propiedad extends Model
 {
     //use HasFactory;

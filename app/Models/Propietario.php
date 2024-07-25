@@ -10,7 +10,7 @@ use App\Traits\FormatearDatos;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- *
+ * 
  *
  * @property int $propietario_id
  * @property string $nombre
@@ -57,6 +57,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int $codigo_de_area
  * @property-read mixed $telefono_completo
  * @method static \Illuminate\Database\Eloquent\Builder|Propietario whereCodigoDeArea($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contrato> $contratos
+ * @property-read int|null $contratos_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Propiedad> $propiedades
+ * @property-read int|null $propiedades_count
  * @mixin \Eloquent
  */
 class Propietario extends Model
@@ -134,6 +138,14 @@ class Propietario extends Model
     {
         return $this->hasMany(
             Propiedad::class,
+            'propietario_fk_id',
+        );
+    }
+
+    public function contratos()
+    {
+        return $this->hasMany(
+            Contrato::class,
             'propietario_fk_id',
         );
     }

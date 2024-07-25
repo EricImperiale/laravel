@@ -2,7 +2,7 @@
 
 namespace App\Searches;
 
-class FiltrosPropietario
+class ActoresSearchParams
 {
     public function __construct(
         private ?string $nombreCompleto = null

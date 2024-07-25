@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface PropietarioRepository
+interface ActoresRepository
 {
     public function all();
 

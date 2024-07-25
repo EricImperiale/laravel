@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Propietarios\CreateRequest;
-use App\Http\Requests\Propietarios\UpdateRequest;
+use App\Http\Requests\Inquilinos\CreateRequest;
+use App\Http\Requests\Inquilinos\UpdateRequest;
+use App\Models\Inquilino;
 use App\Models\PrefijoTelefonico;
-use App\Models\Propietario;
 use App\Repositories\ActoresEloquentRepository;
 use App\Searches\ActoresSearchParams;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
-class PropietariosController extends Controller
+class InquilinoController extends Controller
 {
-    protected ActoresEloquentRepository $repo;
+    public ActoresEloquentRepository $repo;
 
     public function __construct()
     {
-        $this->repo = new ActoresEloquentRepository(Propietario::class);
+        $this->repo = new ActoresEloquentRepository(Inquilino::class);
     }
 
     public function index(Request $request)
@@ -38,17 +38,17 @@ class PropietariosController extends Controller
             });
         }
 
-        $propietarios = $builder->paginate(2);
+        $inquilinos = $builder->paginate(2);
 
-        return view('propietarios.index', [
-            'propietarios' => $propietarios,
+        return view('inquilinos.index', [
+            'inquilinos' => $inquilinos,
             'filtrosPropietario' => $searchParams,
         ]);
     }
 
     public function formCreate()
     {
-        return view('propietarios.create-form', [
+        return view('inquilinos.create-form', [
             'prefijosTelefonicos' => PrefijoTelefonico::all(),
         ]);
     }
@@ -58,55 +58,61 @@ class PropietariosController extends Controller
         $data = $request->except(['_token']);
 
         try {
-            $propietario = $this->repo->create($data);
+            $inquilino = $this->repo->create($data);
+
         } catch (Exception $e) {
             return redirect()
-                ->route('propietarios.index')
+                ->route('inquilinos.index')
                 ->withInput()
-                ->with('status.message', 'Ocurrió un error al crear el propietario. Por favor, probá de nuevo en un rato. Si el problema persiste, comunicate con nosotros.')
+                ->with('status.message', 'Ocurrió un error al crear el inquilino. Por favor, probá de nuevo en un rato. Si el problema persiste, comunicate con nosotros.')
                 ->with('status.type', 'error');
         }
 
         return redirect()
-            ->route('propietarios.index')
-            ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> fue creado con éxito.')
+            ->route('inquilinos.index')
+            ->with('status.message', 'El inquilino <b>' . e($inquilino->nombreCompleto) . '</b> fue creado con éxito.')
             ->with('status.type', 'success');
     }
 
     public function formUpdate(int $id)
     {
-        return view('propietarios.update-form', [
-            'propietario' => Propietario::findOrFail($id),
+        return view('inquilinos.update-form', [
+            'inquilino' => $this->repo->findOrFail($id),
             'prefijosTelefonicos' => PrefijoTelefonico::all(),
         ]);
     }
 
-    public function processUpdate(int $id, UpdateRequest $request)
+    public function processUpdate(UpdateRequest $request, int $id)
     {
         $data = $request->except(['_token']);
 
+        DB::beginTransaction();
+
         try {
-            $propietario = $this->repo->findOrFail($id);
+            $inquilino = $this->repo->findOrFail($id);
 
             $this->repo->update($id, $data);
+
+            DB::commit();
         } catch (Exception $e) {
+            DB::rollBack();
+
             return redirect()
-                ->route('propietarios.formUpdate', ['id' => $propietario->propietario_id])
+                ->route('inquilinos.formUpdate', ['id' => $inquilino->inquilino_id])
                 ->withInput()
                 ->with('status.message', 'Ocurrió un error al actualizar la información. Por favor, probá de nuevo en un rato. Si el problema persiste, comunicate con nosotros.')
                 ->with('status.type', 'error');
         }
 
         return redirect()
-            ->route('propietarios.index')
-            ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> fue editado con éxito.');
+            ->route('inquilinos.index')
+            ->with('status.message', 'El Inquilino <b>' . e($inquilino->nombreCompleto) . '</b> fue editado con éxito.');
     }
 
     public function formDelete(int $id)
     {
-        return view('propietarios.delete-form', [
-            'id' => $id,
-            'propietario' => Propietario::findOrFail($id),
+        return view('inquilinos.delete-form', [
+            'inquilino' => $this->repo->findOrFail($id),
             'prefijosTelefonicos' => PrefijoTelefonico::all(),
         ]);
     }
@@ -114,27 +120,25 @@ class PropietariosController extends Controller
     public function processDelete(int $id)
     {
         try {
-            $propietario = $this->repo->findOrFail($id);
+            $inquilino = $this->repo->findOrFail($id);
 
             // TODO: Ver de pasar esto al repo.
-            if (
-                $propietario->propiedades()->exists() ||
-                $propietario->contratos()->exists()
-            ) {
+            if ($inquilino->contratos()->exists()) {
                 return redirect()
-                    ->route('propietarios.index')
-                    ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> no puede ser eliminado porque tiene una o más propiedades o contratos activos.')                    ->with('status.type', 'error');
+                    ->route('inquilinos.index')
+                    ->with('status.message', 'El inquilino <b>' . e($inquilino->nombreCompleto) . '</b> no puede ser eliminado porque tiene uno o más contratos activos.')
+                    ->with('status.type', 'error');
             }
 
             $this->repo->delete($id);
         } catch (Exception $e) {
             return redirect()
-                ->route('propietarios.index')
-                ->with('status.message', 'Error al eliminar al propietario <b>' . e($propietario->nombreCompleto) . '</b>. ' . $e->getMessage());
+                ->route('inquilinos.index')
+                ->with('status.message', 'Error al eliminar el inquilino <b>' . e($inquilino->nombreCompleto) . '</b>. ' . $e->getMessage());
         }
 
         return redirect()
-            ->route('propietarios.index')
-            ->with('status.message', 'El propietario <b>' . e($propietario->nombreCompleto) . '</b> fue eliminado con éxito.');
+            ->route('inquilinos.index')
+            ->with('status.message', 'El propietario <b>' . e($inquilino->nombreCompleto) . '</b> fue eliminado con éxito.');
     }
 }

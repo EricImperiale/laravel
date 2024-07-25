@@ -1,26 +1,26 @@
 <?php
-/** @var \App\Models\Propietario $propietario */
 /** @var \App\Models\PrefijoTelefonico[]|\Illuminate\Database\Eloquent\Collection $prefijosTelefonicos */
-
 ?>
 @extends('app')
 
-@section('title', 'Editar Propietario :: ' . $propietario->nombreCompleto)
+@section('title', 'Crear Inquilino')
 
 @section('main')
     <section>
         <header>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('propietarios.index') }}">Propietarios</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Editar Propietario</li>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('inquilinos.index') }}">Inquilinos</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Crear Inquilino</li>
+                    </ol>
                 </ol>
             </nav>
 
-            <h2>Estás editando a: <b>{{ $propietario->nombreCompleto }}</b> con DNI <b>{{ $propietario->dni }}</b></h2>
+            <h2>Crear Inquilino</h2>
         </header>
 
-        <form action="{{ route('propietarios.processUpdate', ['id' => $propietario->propietario_id]) }}" method="post">
+        <form action="{{ route('inquilinos.processCreate') }}" method="post">
             @csrf
 
             <div class="mb-3">
@@ -30,8 +30,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="nombre" name="nombre" class="form-control"
-                       value="{{ old('nombre') ?? $propietario->nombre }}">
+                <input type="text" id="nombre" name="nombre" class="form-control" value="{{ old('nombre') }}">
             </div>
 
             <div class="mb-3">
@@ -41,8 +40,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="apellido" name="apellido" class="form-control"
-                       value="{{ old('apellido') ?? $propietario->apellido }}">
+                <input type="text" id="apellido" name="apellido" class="form-control"  value="{{ old('apellido') }}">
             </div>
 
             <div class="row">
@@ -54,8 +52,7 @@
                             {{ $message }}
                         </div>
                         @enderror
-                        <input type="text" id="dni" name="dni" class="form-control"
-                               value="{{ old('dni') ?? $propietario->dni }}">
+                        <input type="text" id="dni" name="dni" class="form-control" value="{{ old('dni') }}">
                         <div class="form-text">Sin puntos, comas y guiones.</div>
                     </div>
                 </div>
@@ -67,8 +64,7 @@
                             {{ $message }}
                         </div>
                         @enderror
-                        <input type="text" id="cuit" name="cuit" class="form-control"
-                               value="{{ old('cuit') ?? $propietario->cuit }}">
+                        <input type="text" id="cuit" name="cuit" class="form-control" value="{{ old('cuit') }}">
                         <div class="form-text">Sin puntos, comas y guiones.</div>
                     </div>
                 </div>
@@ -81,8 +77,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="email" name="email" class="form-control"
-                       value="{{ old('email') ?? $propietario->email }}">
+                <input type="text" id="email" name="email" class="form-control" value="{{ old('email') }}">
             </div>
 
             <div class="mb-3">
@@ -92,8 +87,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="direccion" name="direccion" class="form-control"
-                       value="{{ old('direccion') ?? $propietario->direccion }}">
+                <input type="text" id="direccion" name="direccion" class="form-control" value="{{ old('direccion') }}">
             </div>
 
             <div class="mb-3">
@@ -103,8 +97,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="altura" name="altura" class="form-control"
-                       value="{{ old('altura') ?? $propietario->direccion }}">
+                <input type="text" id="altura" name="altura" class="form-control" value="{{ old('altura') }}">
             </div>
 
             <div class="mb-3">
@@ -114,8 +107,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="cuidad" name="cuidad" class="form-control"
-                       value="{{ old('cuidad') ?? $propietario->cuidad }}">
+                <input type="text" id="cuidad" name="cuidad" class="form-control" value="{{ old('cuidad') }}">
             </div>
 
             <div class="mb-3">
@@ -125,8 +117,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="pais" name="pais" class="form-control"
-                       value="{{ old('pais') ?? $propietario->pais }}">
+                <input type="text" id="pais" name="pais" class="form-control" value="{{ old('pais') }}">
             </div>
 
             <div class="mb-3">
@@ -136,8 +127,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="provincia" name="provincia" class="form-control"
-                       value="{{ old('provincia') ?? $propietario->provincia }}">
+                <input type="text" id="provincia" name="provincia" class="form-control" value="{{ old('provincia') }}">
             </div>
 
             <div class="mb-3">
@@ -147,8 +137,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="barrio" name="barrio" class="form-control"
-                       value="{{ old('barrio') ?? $propietario->barrio }}">
+                <input type="text" id="barrio" name="barrio" class="form-control" value="{{ old('barrio') }}">
             </div>
 
             <div class="mb-3">
@@ -158,8 +147,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="text" id="codigo_postal" name="codigo_postal" class="form-control"
-                       value="{{ old('codigo_postal') ?? $propietario->codigo_postal }}">
+                <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" value="{{ old('codigo_postal') }}">
                 <div class="form-text">Sin puntos, comas y guiones.</div>
             </div>
 
@@ -170,15 +158,14 @@
                         <select name="prefijo_telefonico_fk_id" id="prefijo_telefonico_fk_id" class="form-control">
                             @foreach($prefijosTelefonicos as $prefijo)
                                 <option
-                                        value="{{ $prefijo->prefijo_telefonico_id }}"
-                                        @selected(old('prefijo_telefonico_fk_id', $propietario->prefijo_telefonico_fk_id) == $prefijo->prefijo_telefonico_id)>
+                                    value="{{ $prefijo->prefijo_telefonico_id }}">
                                     {{ $prefijo->prefijosTelefonicos }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <div class="mb-3">
                         <label for="codigo_de_area" class="form-label">Código de área</label>
                         @error('codigo_de_area')
@@ -186,11 +173,10 @@
                             {{ $message }}
                         </div>
                         @enderror
-                        <input type="text" id="codigo_de_area" name="codigo_de_area" class="form-control"
-                               value="{{ old('codigo_de_area') ?? $propietario->codigo_de_area }}">
+                        <input type="text" id="codigo_de_area" name="codigo_de_area" class="form-control"  value="{{ old('codigo_de_area') }}">
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-7">
                     <div class="mb-3">
                         <label for="numero_de_telefono" class="form-label">Número de Teléfono</label>
                         @error('numero_de_telefono')
@@ -198,8 +184,7 @@
                             {{ $message }}
                         </div>
                         @enderror
-                        <input type="text" id="numero_de_telefono" name="numero_de_telefono" class="form-control"
-                               value="{{ old('numero_de_telefono') ?? $propietario->numero_de_telefono }}">
+                        <input type="text" id="numero_de_telefono" name="numero_de_telefono" class="form-control" value="{{ old('numero_de_telefono') }}">
                         <div class="form-text">Sin puntos, comas y guiones.</div>
                     </div>
                 </div>
@@ -212,12 +197,11 @@
                     {{ $message }}
                 </div>
                 @enderror
-                <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" class="form-control"
-                       value="{{ old('fecha_de_nacimiento') ?? $propietario->fecha_de_nacimiento }}">
+                <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" class="form-control" value="{{ old('fecha_de_nacimiento') }}">
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary w-100">Editar Propietario</button>
+                <button type="submit" class="btn btn-primary w-100">Crear Inquilino</button>
             </div>
         </form>
     </section>

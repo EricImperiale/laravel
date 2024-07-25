@@ -1,24 +1,24 @@
 <?php
-/** @var \App\Models\Propietario[]|\Illuminate\Database\Eloquent\Collection $propietarios */
+/** @var \App\Models\Inquilino[]|\Illuminate\Database\Eloquent\Collection $inquilinos */
 /** @var \App\Searches\ActoresSearchParams $filtrosPropietario */
 ?>
 @extends('app')
 
-@section('title', 'Tus Propietarios')
+@section('title', 'Tus Inquilinos')
 
 @section('main')
     <section>
         <header class="mb-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Propietarios</li>
+                    <li class="breadcrumb-item active" aria-current="page">Inquilinos</li>
                 </ol>
             </nav>
 
-            <h2>Propietarios</h2>
-            <a href="{{ route('propietarios.formCreate') }}">Crear Propietario</a>
+            <h2>Inquilinos</h2>
+            <a href="{{ route('inquilinos.formCreate') }}">Crear Inquilino</a>
 
-            <form action="{{ route('propietarios.index') }}" method="get" class="my-3">
+            <form action="{{ route('inquilinos.index') }}" method="get" class="my-3">
                 <label for="nombre_completo" class="form-label">Nombre y/o apellido</label>
                 <div class="input-group">
                     <input type="text" id="nombre_completo" name="nc" class="form-control"
@@ -34,7 +34,7 @@
             @endif
         </header>
 
-        @if($propietarios->isNotEmpty())
+        @if($inquilinos->isNotEmpty())
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead class="table-dark">
@@ -48,16 +48,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($propietarios as $propietario)
+                    @foreach($inquilinos as $inquilino)
                         <tr>
-                            <td>{{ $propietario->nombreCompleto }}</td>
-                            <td>{{ $propietario->dni }}</td>
-                            <td>{{ $propietario->telefonoCompleto }}</td>
-                            <td>{{ $propietario->email }}</td>
-                            <td>{{ $propietario->direccionCompleta }}</td>
+                            <td>{{ $inquilino->nombreCompleto }}</td>
+                            <td>{{ $inquilino->dni }}</td>
+                            <td>{{ $inquilino->telefonoCompleto }}</td>
+                            <td>{{ $inquilino->email }}</td>
+                            <td>{{ $inquilino->direccionCompleta }}</td>
                             <td class="d-flex gap-2">
-                                <a href="{{ route('propietarios.formUpdate', ['id' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('propietarios.formDelete', ['id' => $propietario->propietario_id]) }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                <a href="{{ route('inquilinos.formUpdate', ['id' => $inquilino->inquilino_id]) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ route('inquilinos.formDelete', ['id' => $inquilino->inquilino_id]) }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -65,11 +65,11 @@
                 </table>
 
                 <div id="paginador">
-                    {{ $propietarios->links() }}
+                    {{ $inquilinos->links() }}
                 </div>
             </div>
         @else
-            <p>No hay propietarios para mostrar.</p>
+            <p>No hay inquilinos para mostrar.</p>
         @endif
     </section>
 @endsection

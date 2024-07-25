@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PropietariosController;
 use App\Http\Middleware\VerificarAutenticacion;
+use App\Http\Controllers\InquilinoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,3 +42,24 @@ Route::post('propietarios/{id}/eliminar', [PropietariosController::class, 'proce
     ->name('propietarios.processDelete')
     ->middleware(VerificarAutenticacion::class);
 
+Route::get('inquilinos', [InquilinoController::class, 'index'])
+    ->name('inquilinos.index')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('inquilinos/crear', [InquilinoController::class, 'formCreate'])
+    ->name('inquilinos.formCreate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('inquilinos/crear', [InquilinoController::class, 'processCreate'])
+    ->name('inquilinos.processCreate')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('inquilinos/{id}/editar', [InquilinoController::class, 'formUpdate'])
+    ->name('inquilinos.formUpdate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('inquilinos/{id}/editar', [InquilinoController::class, 'processUpdate'])
+    ->name('inquilinos.processUpdate')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('inquilinos/{id}/eliminar', [InquilinoController::class, 'formDelete'])
+    ->name('inquilinos.formDelete')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('inquilinos/{id}/eliminar', [InquilinoController::class, 'processDelete'])
+    ->name('inquilinos.processDelete')
+    ->middleware(VerificarAutenticacion::class);

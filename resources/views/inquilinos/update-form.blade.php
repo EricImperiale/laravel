@@ -1,26 +1,25 @@
 <?php
-/** @var \App\Models\Propietario $propietario */
+/** @var \App\Models\Inquilino[]|\Illuminate\Database\Eloquent\Collection $inquilino */
 /** @var \App\Models\PrefijoTelefonico[]|\Illuminate\Database\Eloquent\Collection $prefijosTelefonicos */
-
 ?>
 @extends('app')
 
-@section('title', 'Editar Propietario :: ' . $propietario->nombreCompleto)
+@section('title', 'Editar Inquilino :: ' . $inquilino->nombreCompleto)
 
 @section('main')
     <section>
         <header>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('propietarios.index') }}">Propietarios</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Editar Propietario</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('inquilinos.index') }}">Inquilinos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar Inquilino</li>
                 </ol>
             </nav>
 
-            <h2>Estás editando a: <b>{{ $propietario->nombreCompleto }}</b> con DNI <b>{{ $propietario->dni }}</b></h2>
+            <h2>Estás editando a: <b>{{ $inquilino->nombreCompleto }}</b> con DNI <b>{{ $inquilino->dni }}</b></h2>
         </header>
 
-        <form action="{{ route('propietarios.processUpdate', ['id' => $propietario->propietario_id]) }}" method="post">
+        <form action="{{ route('inquilinos.processUpdate', ['id' => $inquilino->inquilino_id]) }}" method="post">
             @csrf
 
             <div class="mb-3">
@@ -31,7 +30,7 @@
                 </div>
                 @enderror
                 <input type="text" id="nombre" name="nombre" class="form-control"
-                       value="{{ old('nombre') ?? $propietario->nombre }}">
+                       value="{{ old('nombre') ?? $inquilino->nombre }}">
             </div>
 
             <div class="mb-3">
@@ -42,7 +41,7 @@
                 </div>
                 @enderror
                 <input type="text" id="apellido" name="apellido" class="form-control"
-                       value="{{ old('apellido') ?? $propietario->apellido }}">
+                       value="{{ old('apellido') ?? $inquilino->apellido }}">
             </div>
 
             <div class="row">
@@ -55,7 +54,7 @@
                         </div>
                         @enderror
                         <input type="text" id="dni" name="dni" class="form-control"
-                               value="{{ old('dni') ?? $propietario->dni }}">
+                               value="{{ old('dni') ?? $inquilino->dni }}">
                         <div class="form-text">Sin puntos, comas y guiones.</div>
                     </div>
                 </div>
@@ -68,7 +67,7 @@
                         </div>
                         @enderror
                         <input type="text" id="cuit" name="cuit" class="form-control"
-                               value="{{ old('cuit') ?? $propietario->cuit }}">
+                               value="{{ old('cuit') ?? $inquilino->cuit }}">
                         <div class="form-text">Sin puntos, comas y guiones.</div>
                     </div>
                 </div>
@@ -82,7 +81,7 @@
                 </div>
                 @enderror
                 <input type="text" id="email" name="email" class="form-control"
-                       value="{{ old('email') ?? $propietario->email }}">
+                       value="{{ old('email') ?? $inquilino->email }}">
             </div>
 
             <div class="mb-3">
@@ -93,7 +92,7 @@
                 </div>
                 @enderror
                 <input type="text" id="direccion" name="direccion" class="form-control"
-                       value="{{ old('direccion') ?? $propietario->direccion }}">
+                       value="{{ old('direccion') ?? $inquilino->direccion }}">
             </div>
 
             <div class="mb-3">
@@ -104,7 +103,7 @@
                 </div>
                 @enderror
                 <input type="text" id="altura" name="altura" class="form-control"
-                       value="{{ old('altura') ?? $propietario->direccion }}">
+                       value="{{ old('altura') ?? $inquilino->direccion }}">
             </div>
 
             <div class="mb-3">
@@ -115,7 +114,7 @@
                 </div>
                 @enderror
                 <input type="text" id="cuidad" name="cuidad" class="form-control"
-                       value="{{ old('cuidad') ?? $propietario->cuidad }}">
+                       value="{{ old('cuidad') ?? $inquilino->cuidad }}">
             </div>
 
             <div class="mb-3">
@@ -126,7 +125,7 @@
                 </div>
                 @enderror
                 <input type="text" id="pais" name="pais" class="form-control"
-                       value="{{ old('pais') ?? $propietario->pais }}">
+                       value="{{ old('pais') ?? $inquilino->pais }}">
             </div>
 
             <div class="mb-3">
@@ -137,7 +136,7 @@
                 </div>
                 @enderror
                 <input type="text" id="provincia" name="provincia" class="form-control"
-                       value="{{ old('provincia') ?? $propietario->provincia }}">
+                       value="{{ old('provincia') ?? $inquilino->provincia }}">
             </div>
 
             <div class="mb-3">
@@ -148,7 +147,7 @@
                 </div>
                 @enderror
                 <input type="text" id="barrio" name="barrio" class="form-control"
-                       value="{{ old('barrio') ?? $propietario->barrio }}">
+                       value="{{ old('barrio') ?? $inquilino->barrio }}">
             </div>
 
             <div class="mb-3">
@@ -159,7 +158,7 @@
                 </div>
                 @enderror
                 <input type="text" id="codigo_postal" name="codigo_postal" class="form-control"
-                       value="{{ old('codigo_postal') ?? $propietario->codigo_postal }}">
+                       value="{{ old('codigo_postal') ?? $inquilino->codigo_postal }}">
                 <div class="form-text">Sin puntos, comas y guiones.</div>
             </div>
 
@@ -170,8 +169,8 @@
                         <select name="prefijo_telefonico_fk_id" id="prefijo_telefonico_fk_id" class="form-control">
                             @foreach($prefijosTelefonicos as $prefijo)
                                 <option
-                                        value="{{ $prefijo->prefijo_telefonico_id }}"
-                                        @selected(old('prefijo_telefonico_fk_id', $propietario->prefijo_telefonico_fk_id) == $prefijo->prefijo_telefonico_id)>
+                                    value="{{ $prefijo->prefijo_telefonico_id }}"
+                                    @selected(old('prefijo_telefonico_fk_id', $inquilino->prefijo_telefonico_fk_id) == $prefijo->prefijo_telefonico_id)>
                                     {{ $prefijo->prefijosTelefonicos }}
                                 </option>
                             @endforeach
@@ -187,7 +186,7 @@
                         </div>
                         @enderror
                         <input type="text" id="codigo_de_area" name="codigo_de_area" class="form-control"
-                               value="{{ old('codigo_de_area') ?? $propietario->codigo_de_area }}">
+                               value="{{ old('codigo_de_area') ?? $inquilino->codigo_de_area }}">
                     </div>
                 </div>
                 <div class="col-8">
@@ -199,7 +198,7 @@
                         </div>
                         @enderror
                         <input type="text" id="numero_de_telefono" name="numero_de_telefono" class="form-control"
-                               value="{{ old('numero_de_telefono') ?? $propietario->numero_de_telefono }}">
+                               value="{{ old('numero_de_telefono') ?? $inquilino->numero_de_telefono }}">
                         <div class="form-text">Sin puntos, comas y guiones.</div>
                     </div>
                 </div>
@@ -213,11 +212,11 @@
                 </div>
                 @enderror
                 <input type="date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" class="form-control"
-                       value="{{ old('fecha_de_nacimiento') ?? $propietario->fecha_de_nacimiento }}">
+                       value="{{ old('fecha_de_nacimiento') ?? $inquilino->fecha_de_nacimiento }}">
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary w-100">Editar Propietario</button>
+                <button type="submit" class="btn btn-primary w-100">Editar Inquilino</button>
             </div>
         </form>
     </section>

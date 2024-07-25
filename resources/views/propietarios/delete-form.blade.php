@@ -1,7 +1,6 @@
 <?php
 /** @var \App\Models\Propietario $propietario */
 /** @var \App\Models\PrefijoTelefonico[]|\Illuminate\Database\Eloquent\Collection $prefijosTelefonicos */
-
 ?>
 @extends('app')
 
@@ -12,10 +11,7 @@
         <header>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Propietarios</li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        <a href="{{ route('propietarios.index') }}">Tus Propietarios</a>
-                    </li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('propietarios.index') }}">Propietarios</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Eliminar Propietario</li>
                 </ol>
             </nav>
