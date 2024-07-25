@@ -63,3 +63,6 @@ Route::get('inquilinos/{id}/eliminar', [InquilinoController::class, 'formDelete'
 Route::post('inquilinos/{id}/eliminar', [InquilinoController::class, 'processDelete'])
     ->name('inquilinos.processDelete')
     ->middleware(VerificarAutenticacion::class);
+Route::get('inquilinos/{id}/contratos', [InquilinoController::class, 'viewContract'])
+    ->name('inquilinos.viewContract')
+    ->middleware(VerificarAutenticacion::class);

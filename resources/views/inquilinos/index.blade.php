@@ -58,6 +58,7 @@
                             <td class="d-flex gap-2">
                                 <a href="{{ route('inquilinos.formUpdate', ['id' => $inquilino->inquilino_id]) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
                                 <a href="{{ route('inquilinos.formDelete', ['id' => $inquilino->inquilino_id]) }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                <a href="{{ route('inquilinos.viewContract', ['id' => $inquilino->inquilino_id]) }}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-book-half"></i></a>
                             </td>
                         </tr>
                     @endforeach

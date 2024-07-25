@@ -141,4 +141,15 @@ class InquilinoController extends Controller
             ->route('inquilinos.index')
             ->with('status.message', 'El propietario <b>' . e($inquilino->nombreCompleto) . '</b> fue eliminado con éxito.');
     }
+
+    public function viewContract(int $id)
+    {
+        $builder = $this->repo->withRelations(['contratos']);
+
+        $inquilino = $builder->findOrFail($id);
+
+        return view('inquilinos.view-contract', [
+            'inquilino' => $inquilino,
+        ]);
+    }
 }
