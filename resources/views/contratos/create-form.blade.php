@@ -2,6 +2,7 @@
 /** @var \App\Models\Propiedad[]|\Illuminate\Database\Eloquent\Collection $propiedades */
 /** @var \App\Models\Propietario[]|\Illuminate\Database\Eloquent\Collection $propietarios */
 /** @var \App\Models\Inquilino[]|\Illuminate\Database\Eloquent\Collection $inquilinos */
+/** @var \App\Models\TipoDeMoneda[]|\Illuminate\Database\Eloquent\Collection $tipoDeMonedas */
 ?>
 @extends('app')
 
@@ -118,14 +119,36 @@
                 </div>
             </div>
 
-            <div class="mb-4">
-                <label for="precio_del_alquiler" class="form-label">Precio del alquiler</label>
-                @error('precio_del_alquiler')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
+            <div class="row mb-4">
+                <div class="col-6">
+                    <label for="precio_del_alquiler" class="form-label">Precio del alquiler</label>
+                    @error('precio_del_alquiler')
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <input type="text" name="precio_del_alquiler" id="precio_del_alquiler" class="form-control" value="{{ old('precio_del_alquiler') ?? null }}">
                 </div>
-                @enderror
-                <input type="text" name="precio_del_alquiler" id="precio_del_alquiler" class="form-control" value="{{ old('precio_del_alquiler') ?? null }}">
+                <div class="col-6">
+                    <label for="tipo_de_moneda_id" class="form-label">Tipo de Moneda</label>
+                    @error('tipo_de_moneda_id')
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <select name="tipo_de_moneda_fk_id" id="tipo_de_moneda_fk_id" class="form-control">
+                        <option value="">Selecciona el Tipo de Moneda</option>
+
+                        @foreach($tipoDeMonedas as $moneda)
+                            <option
+                                value="{{ $moneda->tipo_de_moneda_id }}"
+                                @selected(old('tipo_de_moneda_fk_id') == $moneda->tipo_de_moneda_id)
+                            >
+                                {{ $moneda->moneda }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <button class="btn btn-primary w-100">Crear Contrato</button>

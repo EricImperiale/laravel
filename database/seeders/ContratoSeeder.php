@@ -24,6 +24,7 @@ class ContratoSeeder extends Seeder
                 'inquilino_fk_id' => 2,
                 'propiedad_fk_id' => 1,
                 'precio_del_alquiler' => 50000,
+                'tipo_de_moneda_fk_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -44,6 +44,10 @@ use Illuminate\Support\Carbon;
  * @property-read mixed $calcular_distancia
  * @property-read mixed $traducir_fecha
  * @method static \Illuminate\Database\Eloquent\Builder|Contrato whereFechaDeContrato($value)
+ * @property int $tipo_de_moneda_fk_id
+ * @property-read mixed $fecha_comienzo_para_input_date
+ * @property-read mixed $fecha_final_para_input_date
+ * @method static Builder|Contrato whereTipoDeMonedaFkId($value)
  * @mixin \Eloquent
  */
 class Contrato extends Model
@@ -64,6 +68,7 @@ class Contrato extends Model
         'propiedad_fk_id',
         'propietario_fk_id',
         'inquilino_fk_id',
+        'tipo_de_moneda_fk_id',
     ];
 
     protected function calcularDistancia(): Attribute
@@ -77,14 +82,15 @@ class Contrato extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->propiedad->tdp_fk_id === 2) {
-                    return $this->formatearPrecios($this->propiedad->precio_del_alquiler, $this->propiedad->expensas);
+                if ($this->propiedad_fk_id === 2) {
+                    return $this->formatearPrecioDeAlquiler($this->precio_del_alquiler, $this->propiedad->expensas, $this->tipoDeMoneda->alpha3);
                 }
 
-                return $this->formatearPrecios($this->propiedad->precio_del_alquiler, '');
+                return $this->formatearPrecioDeAlquiler($this->precio_del_alquiler, '', $this->tipoDeMoneda->alpha3);
             }
         );
     }
+
 
     protected function fechaComienzoParaInputDate(): Attribute
     {
@@ -133,6 +139,15 @@ class Contrato extends Model
             Inquilino::class,
             'inquilino_fk_id',
             'inquilino_id',
+        );
+    }
+
+    public function tipoDeMoneda(): BelongsTo
+    {
+        return $this->belongsTo(
+            TipoDeMoneda::class,
+            'tipo_de_moneda_fk_id',
+            'tipo_de_moneda_id',
         );
     }
 }

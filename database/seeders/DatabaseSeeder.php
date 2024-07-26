@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadoDePropiedadSeeder::class);
         $this->call(PropiedadesSeeder::class);
 
+        $this->call(TipoDeMonedaSeeder::class);
         $this->call(ContratoSeeder::class);
     }
 }

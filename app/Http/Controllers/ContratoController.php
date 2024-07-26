@@ -7,6 +7,7 @@ use App\Http\Requests\Contratos\UpdateRequest;
 use App\Models\Inquilino;
 use App\Models\Propiedad;
 use App\Models\Propietario;
+use App\Models\TipoDeMoneda;
 use App\Repositories\ContratosEloquentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,7 @@ class ContratoController extends Controller
             'propiedades' => Propiedad::all(),
             'propietarios' => Propietario::all(['propietario_id', 'nombre', 'apellido', 'dni']),
             'inquilinos' => Inquilino::all(['inquilino_id', 'nombre', 'apellido', 'dni']),
+            'tipoDeMonedas' => TipoDeMoneda::all(),
         ]);
     }
 
@@ -71,6 +73,7 @@ class ContratoController extends Controller
             'propietarios' => Propietario::all(['propietario_id', 'nombre', 'apellido', 'dni']),
             'inquilinos' => Inquilino::all(['inquilino_id', 'nombre', 'apellido', 'dni']),
             'contrato' => $contrato,
+            'tipoDeMonedas' => TipoDeMoneda::all(),
         ]);
     }
 

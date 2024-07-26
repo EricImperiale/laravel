@@ -14,10 +14,19 @@ trait FormatearDatos
     public function formatearPrecios(string $alquiler, string|null $expensas): string
     {
         if ($expensas) {
-            return' $' . $alquiler . ' + ' . ' $' . $expensas . ' expensas';
+            return ' $' . $alquiler . ' + ' . ' $' . $expensas . ' expensas';
         }
 
-        return' $' . $alquiler;
+        return ' $' . $alquiler;
+    }
+
+    public function formatearPrecioDeAlquiler(string $alquiler, string $expensas, string $tipoDeMoneda): string
+    {
+        if ($expensas) {
+            return $tipoDeMoneda . ' ' . $alquiler . ' + ' . ' $' . $expensas . ' expensas';
+        }
+
+        return $tipoDeMoneda . ' ' . $alquiler;
     }
 
     public function formatearFechas(string $fecha): ?string
