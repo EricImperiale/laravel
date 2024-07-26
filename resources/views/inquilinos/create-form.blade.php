@@ -10,10 +10,8 @@
         <header>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('inquilinos.index') }}">Inquilinos</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Crear Inquilino</li>
-                    </ol>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('inquilinos.index') }}">Inquilinos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear Inquilino</li>
                 </ol>
             </nav>
 

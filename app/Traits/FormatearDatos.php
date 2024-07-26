@@ -14,7 +14,7 @@ trait FormatearDatos
     public function formatearPrecios(string $alquiler, string|null $expensas): string
     {
         if ($expensas) {
-            return' $' . $this->precio_del_alquiler . ' + ' . ' $' . $this->expensas . ' Expensas';
+            return' $' . $this->precio_del_alquiler . ' + ' . ' $' . $this->expensas . ' expensas';
         }
 
         return' $' . $this->precio_del_alquiler;

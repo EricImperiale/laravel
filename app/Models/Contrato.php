@@ -6,6 +6,7 @@ use App\Traits\FormatearDatos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Carbon;
 
 /**
  *
@@ -54,6 +55,7 @@ class Contrato extends Model
         'fecha_de_comienzo',
         'fecha_de_final',
         'fecha_de_vencimiento',
+        'propiedad_fk_id',
         'propietario_fk_id',
         'inquilino_fk_id',
     ];
@@ -62,6 +64,28 @@ class Contrato extends Model
     {
         return Attribute::make(
             get: fn () => $this->calcularDistanciaEntreFechas($this->fecha_de_comienzo, $this->fecha_de_final),
+        );
+    }
+
+    protected function alquiler(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->propiedad->tdp_fk_id === 2) {
+                    return $this->formatearPrecios($this->propiedad->precio_del_alquiler, $this->propiedad->expensas);
+                }
+
+                return $this->formatearPrecios($this->propiedad->precio_del_alquiler, '');
+            }
+        );
+    }
+
+    protected function traducirFecha(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return Carbon::parse($this->fecha_de_contrato)->locale('es')->translatedFormat('j \d\e F \d\e Y');
+            }
         );
     }
 

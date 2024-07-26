@@ -15,7 +15,7 @@
             </nav>
 
             <h2 class="mb-2">Contratos</h2>
-            <a href="{{ route('propietarios.formCreate') }}">Crear Contrato</a>
+            <a href="{{ route('contratos.formCreate') }}">Crear Contrato</a>
         </header>
 
         @if($contratos->isNotEmpty())
@@ -38,9 +38,10 @@
                             <td>{{ $contrato->propiedad->direccionCompleta }}</td>
                             <td>{{ $contrato->propietario->nombreCompleto }}</td>
                             <td>{{ $contrato->inquilino->nombreCompleto }}</td>
-                            <td>{{ $contrato->fecha_de_contrato }}</td>
+                            <td>{{ $contrato->traducirFecha }}</td>
                             <td>{{ $contrato->calcularDistancia }}</td>
-                            <td>{{ $contrato->precio_del_alquiler }}</td>
+                            <td>{{ $contrato->alquiler }}</td>
+                            <td><a href="" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

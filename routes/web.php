@@ -71,3 +71,9 @@ Route::get('inquilinos/{id}/contratos', [InquilinoController::class, 'viewContra
 Route::get('contratos', [ContratoController::class, 'index'])
     ->name('contratos.index')
     ->middleware(VerificarAutenticacion::class);
+Route::get('contratos/crear', [ContratoController::class, 'formCreate'])
+    ->name('contratos.formCreate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('contratos/crear', [ContratoController::class, 'processCreate'])
+    ->name('contratos.processCreate')
+    ->middleware(VerificarAutenticacion::class);

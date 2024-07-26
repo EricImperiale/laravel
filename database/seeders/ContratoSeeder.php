@@ -16,7 +16,7 @@ class ContratoSeeder extends Seeder
     {
         DB::table('contratos')->insert([
             [
-                'fecha_de_contrato' => Carbon::now()->locale('es')->translatedFormat('j \d\e F \d\e Y'),
+                'fecha_de_contrato' => Carbon::now(),
                 'fecha_de_comienzo' => Carbon::now()->format('d-m-Y'),
                 'fecha_de_final' => Carbon::now()->addMonth(13)->format('d-m-Y'),
                 'fecha_de_vencimiento' => 5,

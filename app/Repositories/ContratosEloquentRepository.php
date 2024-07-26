@@ -53,8 +53,7 @@ class ContratosEloquentRepository implements ContratosRepository
     public function create(array $data)
     {
         DB::transaction(function() use ($data) {
-            $movie = Contrato::create($data);
-            $movie->genres()->attach($data['genre_id'] ?? []);
+            Contrato::create($data);
         });
     }
 
