@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Traits\FormatearDatos;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $contrato_id
  * @property int $precio_del_alquiler
@@ -82,6 +83,20 @@ class Contrato extends Model
 
                 return $this->formatearPrecios($this->propiedad->precio_del_alquiler, '');
             }
+        );
+    }
+
+    protected function fechaComienzoParaInputDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::parse($this->fecha_de_comienzo)->format('Y-m-d'),
+        );
+    }
+
+    protected function fechaFinalParaInputDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::parse($this->fecha_de_final)->format('Y-m-d'),
         );
     }
 

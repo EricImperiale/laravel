@@ -77,3 +77,9 @@ Route::get('contratos/crear', [ContratoController::class, 'formCreate'])
 Route::post('contratos/crear', [ContratoController::class, 'processCreate'])
     ->name('contratos.processCreate')
     ->middleware(VerificarAutenticacion::class);
+Route::get('contratos/{id}/editar', [ContratoController::class, 'formUpdate'])
+    ->name('contratos.formUpdate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('contratos/{id}/editar', [ContratoController::class, 'processUpdate'])
+    ->name('contratos.processUpdate')
+    ->middleware(VerificarAutenticacion::class);

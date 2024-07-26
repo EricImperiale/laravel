@@ -50,6 +50,11 @@ class ContratosEloquentRepository implements ContratosRepository
         return Contrato::findOrFail($id);
     }
 
+    public function findOrFailWithRelations(int $id, array $relations)
+    {
+        return $this->contrato::with($relations)->findOrFail($id);
+    }
+
     public function create(array $data)
     {
         DB::transaction(function() use ($data) {

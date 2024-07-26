@@ -16,6 +16,8 @@ interface ContratosRepository
 
     public function findOrFail(int $id);
 
+    public function findOrFailWithRelations(int $id, array $relations);
+
     public function create(array $data);
 
     public function update(int $id, array $data);

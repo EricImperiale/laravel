@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Contratos\CreateRequest;
+use App\Http\Requests\Contratos\UpdateRequest;
 use App\Models\Inquilino;
 use App\Models\Propiedad;
 use App\Models\Propietario;
@@ -59,5 +60,44 @@ class ContratoController extends Controller
         return redirect()
             ->route('contratos.index')
             ->with('status.message', 'El contrato fue creado con éxito.');
+    }
+
+    public function formUpdate(int $id)
+    {
+        $contrato = $this->repo->findOrFailWithRelations($id, ['inquilino', 'propietario']);
+
+        return view('contratos.update-form', [
+            'propiedades' => Propiedad::all(),
+            'propietarios' => Propietario::all(['propietario_id', 'nombre', 'apellido', 'dni']),
+            'inquilinos' => Inquilino::all(['inquilino_id', 'nombre', 'apellido', 'dni']),
+            'contrato' => $contrato,
+        ]);
+    }
+
+    public function processUpdate(UpdateRequest $request, int $id)
+    {
+        $data = $request->except(['_token']);
+
+        DB::beginTransaction();
+
+        try {
+            $contrato = $this->repo->findOrFail($id);
+
+            $this->repo->update($id, $data);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->route('contratos.formUpdate', ['id' => $contrato->contrato_id])
+                ->withInput()
+                ->with('status.message', 'Ocurrió un error al actualizar la información. Por favor, probá de nuevo en un rato. Si el problema persiste, comunicate con nosotros.')
+                ->with('status.type', 'error');
+        }
+
+        return redirect()
+            ->route('contratos.index')
+            ->with('status.message', 'El Contrato fue editado con éxito.');
     }
 }
