@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $propiedad_id
  * @property string $direccion
@@ -115,7 +115,7 @@ class Propiedad extends Model
         return Attribute::make(
             get: function () {
                 if ($this->tdp_fk_id === 2) {
-                    return $this->tipoDePropiedad->tipo_de_propiedad . 'en ' . $this->direccion . ' ' . $this->altura . ', ' . $this->piso . $this->numero_de_departamento . ', ' . $this->barrio . ', ' . $this->provincia;
+                    return $this->tipoDePropiedad->tipo_de_propiedad . ' en ' . $this->direccion . ' ' . $this->altura . ', ' . $this->piso . $this->numero_de_departamento . ', ' . $this->barrio . ', ' . $this->provincia;
                 }
 
                 return  $this->tipoDePropiedad->tipo_de_propiedad . ' en ' . $this->direccion . ' ' . $this->altura . ', ' . $this->barrio . ', ' . $this->provincia;

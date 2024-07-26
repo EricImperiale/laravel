@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @property int $contrato_id
  * @property int $precio_del_alquiler
@@ -38,6 +38,11 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\Propiedad $propiedad
  * @method static \Illuminate\Database\Eloquent\Builder|Contrato wherePropiedadFkId($value)
  * @property-read mixed $calcular_diferencia
+ * @property string $fecha_de_contrato
+ * @property-read mixed $alquiler
+ * @property-read mixed $calcular_distancia
+ * @property-read mixed $traducir_fecha
+ * @method static \Illuminate\Database\Eloquent\Builder|Contrato whereFechaDeContrato($value)
  * @mixin \Eloquent
  */
 class Contrato extends Model

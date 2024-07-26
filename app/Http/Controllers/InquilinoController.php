@@ -144,12 +144,11 @@ class InquilinoController extends Controller
 
     public function viewContract(int $id)
     {
-        $builder = $this->repo->withRelations(['contratos']);
-
-        $inquilino = $builder->findOrFail($id);
+        $contratos = $this->repo->findOrFailWithRelations($id, ['contratos.propietario', 'contratos.inquilino']);
 
         return view('inquilinos.view-contract', [
-            'inquilino' => $inquilino,
+            'inquilino' => $this->repo->findOrFail($id),
+            'contratos' => $contratos->contratos,
         ]);
     }
 }

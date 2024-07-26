@@ -137,7 +137,6 @@ class Inquilino extends Model
         return $this->hasMany(
             Contrato::class,
             'inquilino_fk_id',
-            'inquilino_id',
         );
     }
 }

@@ -50,6 +50,12 @@ class ActoresEloquentRepository implements ActoresRepository
         return $this->modelClass::findOrFail($id);
     }
 
+    public function findOrFailWithRelations(int $id, array $relations)
+    {
+        $model = new $this->modelClass;
+        return $model::with($relations)->findOrFail($id);
+    }
+
     public function create(array $data)
     {
         return DB::transaction(function() use ($data) {
