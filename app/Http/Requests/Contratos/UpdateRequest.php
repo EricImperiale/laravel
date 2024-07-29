@@ -32,8 +32,7 @@ class UpdateRequest extends FormRequest
             'propiedad_fk_id' => [
                 'required',
                 'exists:propiedades,propiedad_id',
-                // Laravel que ignore el propiedad_fk_id del contrato que estás editando para que no lo considere como un duplicado
-                Rule::unique('contratos')->ignore($propietario_fk_id, 'propietario_fk_id'),
+                'unique:contratos,propiedad_fk_id,' . $propietario_fk_id,
             ],
             'fecha_de_comienzo' => 'required|date|after_or_equal:' . $currentDate,
             'fecha_de_final' => 'required|date|after:fecha_de_comienzo',
