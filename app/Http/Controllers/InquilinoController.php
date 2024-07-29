@@ -139,7 +139,7 @@ class InquilinoController extends Controller
 
         return redirect()
             ->route('inquilinos.index')
-            ->with('status.message', 'El propietario <b>' . e($inquilino->nombreCompleto) . '</b> fue eliminado con éxito.');
+            ->with('status.message', 'El Inquilino <b>' . e($inquilino->nombreCompleto) . '</b> fue eliminado con éxito.');
     }
 
     public function viewContract(int $id)

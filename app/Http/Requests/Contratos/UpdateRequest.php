@@ -24,15 +24,17 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         $currentDate = now()->format('Y-m-d');
-        $propietario_fk_id = request()->propietario_fk_id;
+        $propiedad_fk_id = request()->propiedad_fk_id;
 
         return [
             'propietario_fk_id' => 'required|exists:propietarios,propietario_id',
             'inquilino_fk_id' => 'required|exists:inquilinos,inquilino_id|different:propietario_fk_id',
+            'garante_fk_id' => 'required|exists:garantes,garante_id|different:propietario_fk_id|different:inquilino_fk_id',
             'propiedad_fk_id' => [
                 'required',
                 'exists:propiedades,propiedad_id',
-                'unique:contratos,propiedad_fk_id,' . $propietario_fk_id,
+                'unique:contratos,propiedad_fk_id,'.$propiedad_fk_id,
+                Rule::unique('contratos')->ignore('propiedad_fk_id', $propiedad_fk_id),
             ],
             'fecha_de_comienzo' => 'required|date|after_or_equal:' . $currentDate,
             'fecha_de_final' => 'required|date|after:fecha_de_comienzo',
@@ -52,6 +54,9 @@ class UpdateRequest extends FormRequest
             'propiedad_fk_id.required' => 'El campo Propiedad es obligatorio.',
             'propiedad_fk_id.exists' => 'La Propiedad seleccionada no es válida.',
             'propiedad_fk_id.unique' => 'Está propiedad ya tiene un contrato activo.',
+            'garante_fk_id.required' => 'Tenés que seleccionar un Garante.',
+            'garante_fk_id.exists' => 'El Garante seleccionado no es válido.',
+            'garante_fk_id.different' => 'El Garante no puede ser el mismo que el Propietario ni el Inquilino.',
             'fecha_de_comienzo.required' => 'El campo Fecha de Comienzo es obligatorio.',
             'fecha_de_comienzo.date' => 'El campo Fecha de Comienzo debe ser una fecha válida.',
             'fecha_de_comienzo.after_or_equal' => 'El campo Fecha de Comienzo no puede ser anterior a la fecha actual.',

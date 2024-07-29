@@ -68,12 +68,13 @@ class ContratoController extends Controller
 
     public function formUpdate(int $id)
     {
-        $contrato = $this->repo->findOrFailWithRelations($id, ['inquilino', 'propietario']);
+        $contrato = $this->repo->findOrFailWithRelations($id, ['inquilino', 'propietario', 'garante']);
 
         return view('contratos.update-form', [
             'propiedades' => Propiedad::all(),
             'propietarios' => Propietario::all(['propietario_id', 'nombre', 'apellido', 'dni']),
             'inquilinos' => Inquilino::all(['inquilino_id', 'nombre', 'apellido', 'dni']),
+            'garantes' => Garante::all(['garante_id', 'nombre', 'apellido', 'dni']),
             'contrato' => $contrato,
             'tipoDeMonedas' => TipoDeMoneda::all(),
         ]);
@@ -104,5 +105,38 @@ class ContratoController extends Controller
         return redirect()
             ->route('contratos.index')
             ->with('status.message', 'El Contrato fue editado con éxito.');
+    }
+
+    public function formDelete(int $id)
+    {
+        return view('contratos.delete-form', [
+            'contrato' =>  $this->repo->findOrFailWithRelations($id, ['inquilino', 'propietario', 'garante']),
+            'tipoDeMonedas' => TipoDeMoneda::all(),
+        ]);
+    }
+
+    public function processDelete(int $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $contrato = $this->repo->findOrFail($id);
+
+            $this->repo->delete($id);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return redirect()
+                ->route('contratos.index', ['id' => $contrato->contrato_id])
+                ->withInput()
+                ->with('status.message', 'Ocurrió un error al intentar eliminar la información. Por favor, probá de nuevo en un rato. Si el problema persiste, comunicate con nosotros.')
+                ->with('status.type', 'error');
+        }
+
+        return redirect()
+            ->route('contratos.index')
+            ->with('status.message', 'El Contrato fue eliminado con éxito.');
     }
 }

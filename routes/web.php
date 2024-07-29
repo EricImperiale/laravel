@@ -105,3 +105,9 @@ Route::get('contratos/{id}/editar', [ContratoController::class, 'formUpdate'])
 Route::post('contratos/{id}/editar', [ContratoController::class, 'processUpdate'])
     ->name('contratos.processUpdate')
     ->middleware(VerificarAutenticacion::class);
+Route::get('contratos/{id}/eliminar', [ContratoController::class, 'formDelete'])
+    ->name('contratos.formDelete')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('contratos/{id}/eliminar', [ContratoController::class, 'processDelete'])
+    ->name('contratos.processDelete')
+    ->middleware(VerificarAutenticacion::class);

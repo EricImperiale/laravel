@@ -52,26 +52,50 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label for="inquilino_fk_id" class="form-label">Inquilino</label>
-                @error('inquilino_fk_id')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror
-                <select name="inquilino_fk_id" id="inquilino_fk_id" class="form-control">
-                    <option value="">Selecciona un Inquilino</option>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="inquilino_fk_id" class="form-label">Inquilino</label>
+                    @error('inquilino_fk_id')
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <select name="inquilino_fk_id" id="inquilino_fk_id" class="form-control">
+                        <option value="">Selecciona un Inquilino</option>
 
-                    @foreach($inquilinos as $inquilino)
-                        <option
-                            value="{{ $inquilino->inquilino_id }}"
-                            @selected(old('inquilino_fk_id', $contrato->inquilino->inquilino_id) == $inquilino->inquilino_id)
-                        >
-                            {{ $inquilino->nombreCompleto }} - DNI: {{ $inquilino->dni }}
-                        </option>
-                    @endforeach
-                </select>
+                        @foreach($inquilinos as $inquilino)
+                            <option
+                                value="{{ $inquilino->inquilino_id }}"
+                                @selected(old('inquilino_fk_id', $contrato->inquilino->inquilino_id) == $inquilino->inquilino_id)
+                            >
+                                {{ $inquilino->nombreCompleto }} - DNI: {{ $inquilino->dni }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label for="garante_fk_id" class="form-label">Garante</label>
+                    @error('garante_fk_id')
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <select name="garante_fk_id" id="garante_fk_id" class="form-control">
+                        <option value="">Selecciona un Garante</option>
+
+                        @foreach($garantes as $garante)
+                            <option
+                                value="{{ $garante->garante_id }}"
+                                @selected(old('garante_fk_id', $contrato->garante->garante_id) == $garante->garante_id)
+                            >
+                                {{ $garante->nombreCompleto }} - DNI: {{ $garante->dni }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
+
 
             <div class="mb-3">
                 <label for="propiedad_fk_id" class="form-label">Propiedad</label>

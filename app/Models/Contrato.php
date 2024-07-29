@@ -144,6 +144,15 @@ class Contrato extends Model
         );
     }
 
+    public function garante(): BelongsTo
+    {
+        return $this->belongsTo(
+            Garante::class,
+            'garante_fk_id',
+            'garante_id',
+        );
+    }
+
     public function tipoDeMoneda(): BelongsTo
     {
         return $this->belongsTo(

@@ -26,6 +26,7 @@
                         <th scope="col">Propiedad</th>
                         <th scope="col">Propietario</th>
                         <th scope="col">Inquilino</th>
+                        <th scope="col">Garante</th>
                         <th scope="col">Creación</th>
                         <th scope="col">Final del contrato</th>
                         <th scope="col">Alquiler</th>
@@ -38,12 +39,13 @@
                             <td>{{ $contrato->propiedad->direccionCompleta }}</td>
                             <td>{{ $contrato->propietario->nombreCompleto }}</td>
                             <td>{{ $contrato->inquilino->nombreCompleto }}</td>
+                            <td>{{ $contrato->garante->nombreCompleto }}</td>
                             <td>{{ $contrato->traducirFecha }}</td>
                             <td>{{ $contrato->calcularDistancia }}</td>
                             <td>{{ $contrato->alquiler }}</td>
                             <td class="d-flex gap-2">
                                 <a href="{{ route('contratos.formUpdate', ['id' => $contrato->contrato_id]) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('contratos.formUpdate', ['id' => $contrato->contrato_id]) }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                <a href="{{ route('contratos.formDelete', ['id' => $contrato->contrato_id]) }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
                             </td>
                         </tr>
                     @endforeach
