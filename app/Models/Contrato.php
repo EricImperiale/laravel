@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @property int $contrato_id
  * @property int $precio_del_alquiler
@@ -48,6 +48,7 @@ use Illuminate\Support\Carbon;
  * @property-read mixed $fecha_comienzo_para_input_date
  * @property-read mixed $fecha_final_para_input_date
  * @method static Builder|Contrato whereTipoDeMonedaFkId($value)
+ * @property-read \App\Models\TipoDeMoneda $tipoDeMoneda
  * @mixin \Eloquent
  */
 class Contrato extends Model

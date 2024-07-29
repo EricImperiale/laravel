@@ -37,6 +37,9 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('contratos*') ? 'active' : '' }}" href="{{ route('contratos.index') }}">Contratos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is('garantes*') ? 'active' : '' }}" href="{{ route('garantes.index') }}">Garantes</a>
+                            </li>
                         </ul>
                         @auth
                             <ul class="navbar-nav">

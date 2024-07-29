@@ -22,6 +22,7 @@ class ContratoSeeder extends Seeder
                 'fecha_de_vencimiento' => 5,
                 'propietario_fk_id' => 1,
                 'inquilino_fk_id' => 2,
+                'garante_fk_id' => 3,
                 'propiedad_fk_id' => 1,
                 'precio_del_alquiler' => 50000,
                 'tipo_de_moneda_fk_id' => 2,

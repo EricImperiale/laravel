@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TipoDeMoneda whereMoneda($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TipoDeMoneda whereTipoDeMonedaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TipoDeMoneda whereUpdatedAt($value)
+ * @property string $alpha3
+ * @method static \Illuminate\Database\Eloquent\Builder|TipoDeMoneda whereAlpha3($value)
  * @mixin \Eloquent
  */
 class TipoDeMoneda extends Model

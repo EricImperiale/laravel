@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(PrefijoTelefonicoSeeder::class);
+        $this->call(GaranteSeeder::class);
         $this->call(InquilinoSeeder::class);
         $this->call(PropietarioSeeder::class);
 

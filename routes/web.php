@@ -6,13 +6,13 @@ use App\Http\Controllers\PropietariosController;
 use App\Http\Middleware\VerificarAutenticacion;
 use App\Http\Controllers\InquilinoController;
 use App\Http\Controllers\ContratoController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\GaranteController;
 
 Route::get('/', [AuthController::class, 'formLogin'])
     ->name('auth.formLogin');
+Route::get('/iniciar-sesion', [AuthController::class, 'formLogin'])
+    ->name('auth.formLogin');
+
 Route::get('iniciar-sesion', [AuthController::class, 'formLogin'])
     ->name('auth.formLogin');
 Route::post('iniciar-sesion', [AuthController::class, 'processLogin'])
@@ -66,6 +66,28 @@ Route::post('inquilinos/{id}/eliminar', [InquilinoController::class, 'processDel
     ->middleware(VerificarAutenticacion::class);
 Route::get('inquilinos/{id}/contratos', [InquilinoController::class, 'viewContract'])
     ->name('inquilinos.viewContract')
+    ->middleware(VerificarAutenticacion::class);
+
+Route::get('garantes', [GaranteController::class, 'index'])
+    ->name('garantes.index')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('garantes/crear', [GaranteController::class, 'formCreate'])
+    ->name('garantes.formCreate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('garantes/crear', [GaranteController::class, 'processCreate'])
+    ->name('garantes.processCreate')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('garantes/{id}/editar', [GaranteController::class, 'formUpdate'])
+    ->name('garantes.formUpdate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('garantes/{id}/editar', [GaranteController::class, 'processUpdate'])
+    ->name('garantes.processUpdate')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('garantes/{id}/eliminar', [GaranteController::class, 'formDelete'])
+    ->name('garantes.formDelete')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('garantes/{id}/eliminar', [GaranteController::class, 'processDelete'])
+    ->name('garantes.processDelete')
     ->middleware(VerificarAutenticacion::class);
 
 Route::get('contratos', [ContratoController::class, 'index'])
