@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $contrato_id
  * @property int $precio_del_alquiler
@@ -69,6 +69,7 @@ class Contrato extends Model
         'propiedad_fk_id',
         'propietario_fk_id',
         'inquilino_fk_id',
+        'garante_fk_id',
         'tipo_de_moneda_fk_id',
     ];
 

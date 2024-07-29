@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contratos\CreateRequest;
 use App\Http\Requests\Contratos\UpdateRequest;
+use App\Models\Garante;
 use App\Models\Inquilino;
 use App\Models\Propiedad;
 use App\Models\Propietario;
@@ -39,6 +40,7 @@ class ContratoController extends Controller
             'propiedades' => Propiedad::all(),
             'propietarios' => Propietario::all(['propietario_id', 'nombre', 'apellido', 'dni']),
             'inquilinos' => Inquilino::all(['inquilino_id', 'nombre', 'apellido', 'dni']),
+            'garantes' => Garante::all(['garante_id', 'nombre', 'apellido', 'dni']),
             'tipoDeMonedas' => TipoDeMoneda::all(),
         ]);
     }

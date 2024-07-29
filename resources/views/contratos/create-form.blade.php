@@ -2,6 +2,7 @@
 /** @var \App\Models\Propiedad[]|\Illuminate\Database\Eloquent\Collection $propiedades */
 /** @var \App\Models\Propietario[]|\Illuminate\Database\Eloquent\Collection $propietarios */
 /** @var \App\Models\Inquilino[]|\Illuminate\Database\Eloquent\Collection $inquilinos */
+/** @var \App\Models\Garante[]|\Illuminate\Database\Eloquent\Collection $garantes */
 /** @var \App\Models\TipoDeMoneda[]|\Illuminate\Database\Eloquent\Collection $tipoDeMonedas */
 ?>
 @extends('app')
@@ -45,25 +46,48 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label for="inquilino_fk_id" class="form-label">Inquilino</label>
-                @error('inquilino_fk_id')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror
-                <select name="inquilino_fk_id" id="inquilino_fk_id" class="form-control">
-                    <option value="">Selecciona un Inquilino</option>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="inquilino_fk_id" class="form-label">Inquilino</label>
+                    @error('inquilino_fk_id')
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <select name="inquilino_fk_id" id="inquilino_fk_id" class="form-control">
+                        <option value="">Selecciona un Inquilino</option>
 
-                    @foreach($inquilinos as $inquilino)
-                        <option
-                            value="{{ $inquilino->inquilino_id }}"
-                            @selected(old('inquilino_fk_id') == $inquilino->inquilino_id)
-                        >
-                            {{ $inquilino->nombreCompleto }} - DNI: {{ $inquilino->dni }}
-                        </option>
-                    @endforeach
-                </select>
+                        @foreach($inquilinos as $inquilino)
+                            <option
+                                value="{{ $inquilino->inquilino_id }}"
+                                @selected(old('inquilino_fk_id') == $inquilino->inquilino_id)
+                            >
+                                {{ $inquilino->nombreCompleto }} - DNI: {{ $inquilino->dni }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label for="garante_fk_id" class="form-label">Garante</label>
+                    @error('garante_fk_id')
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    <select name="garante_fk_id" id="garante_fk_id" class="form-control">
+                        <option value="">Selecciona un Garante</option>
+
+                        @foreach($garantes as $garante)
+                            <option
+                                value="{{ $garante->garante_id }}"
+                                @selected(old('garante_fk_id') == $garante->garante_id)
+                            >
+                                {{ $garante->nombreCompleto }} - DNI: {{ $garante->dni }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3">
@@ -130,8 +154,8 @@
                     <input type="text" name="precio_del_alquiler" id="precio_del_alquiler" class="form-control" value="{{ old('precio_del_alquiler') ?? null }}">
                 </div>
                 <div class="col-6">
-                    <label for="tipo_de_moneda_id" class="form-label">Tipo de Moneda</label>
-                    @error('tipo_de_moneda_id')
+                    <label for="tipo_de_moneda_fk_id" class="form-label">Tipo de Moneda</label>
+                    @error('tipo_de_moneda_fk_id')
                     <div class="alert alert-danger" role="alert">
                         {{ $message }}
                     </div>

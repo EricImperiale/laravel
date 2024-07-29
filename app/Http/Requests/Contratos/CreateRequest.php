@@ -32,10 +32,17 @@ class CreateRequest extends FormRequest
                 'exists:propiedades,propiedad_id',
                 'unique:contratos,propiedad_fk_id',
             ],
+            'garante_fk_id' => [
+                'required',
+                'exists:garantes,garante_id',
+                'different:propietario_fk_id',
+                'different:inquilino_fk_id',
+            ],
             'fecha_de_comienzo' => 'required|date|after_or_equal:' . $currentDate,
             'fecha_de_final' => 'required|date|after:fecha_de_comienzo',
             'precio_del_alquiler' => 'required|numeric|min:0',
             'fecha_de_vencimiento' => 'required|numeric',
+            'tipo_de_moneda_fk_id' => 'required|numeric',
         ];
     }
 
@@ -49,7 +56,10 @@ class CreateRequest extends FormRequest
             'inquilino_fk_id.different' => 'El Propietario y el Inquilino no pueden ser la misma persona.',
             'propiedad_fk_id.required' => 'El campo Propiedad es obligatorio.',
             'propiedad_fk_id.exists' => 'La Propiedad seleccionada no es válida.',
-            'propiedad_fk_id.unique' => 'Está Propiedad ya tiene un contrato activo.',
+            'propiedad_fk_id.unique' => 'Esta Propiedad ya tiene un contrato activo.',
+            'garante_fk_id.required' => 'Tenés que seleccionar un Garante.',
+            'garante_fk_id.exists' => 'El Garante seleccionado no es válido.',
+            'garante_fk_id.different' => 'El Garante no puede ser el mismo que el Propietario ni el Inquilino.',
             'fecha_de_comienzo.required' => 'El campo Fecha de Comienzo es obligatorio.',
             'fecha_de_comienzo.date' => 'El campo Fecha de Comienzo debe ser una fecha válida.',
             'fecha_de_comienzo.after_or_equal' => 'El campo Fecha de Comienzo no puede ser anterior a la fecha actual.',
@@ -61,6 +71,7 @@ class CreateRequest extends FormRequest
             'precio_del_alquiler.min' => 'El campo Precio del Alquiler debe ser mayor o igual a 0.',
             'fecha_de_vencimiento.required' => 'El campo Fecha de Vencimiento es obligatorio.',
             'fecha_de_vencimiento.numeric' => 'El campo Fecha de Vencimiento debe ser un número.',
+            'tipo_de_moneda_fk_id.required' => 'Tenés que seleccionar un Tipo de Moneda.',
         ];
     }
 }
