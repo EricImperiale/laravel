@@ -13,48 +13,40 @@
 </head>
 <body>
     <header>
-        @if(Request::is('iniciar-sesion'))
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container">
-                    <a class="navbar-brand text-center m-auto" href="#">Iniciar Sesión</a>
-                </div>
-            </nav>
-        @else
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('propietarios*') ? 'active' : '' }}" href="{{ route('propietarios.index') }}">Propietarios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('inquilinos*') ? 'active' : '' }}" href="{{ route('inquilinos.index') }}">Inquilinos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('contratos*') ? 'active' : '' }}" href="{{ route('contratos.index') }}">Contratos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('garantes*') ? 'active' : '' }}" href="{{ route('garantes.index') }}">Garantes</a>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('contratos*') ? 'active' : '' }}" href="{{ route('contratos.index') }}">Contratos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('propietarios*') ? 'active' : '' }}" href="{{ route('propietarios.index') }}">Propietarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('inquilinos*') ? 'active' : '' }}" href="{{ route('inquilinos.index') }}">Inquilinos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('garantes*') ? 'active' : '' }}" href="{{ route('garantes.index') }}">Garantes</a>
+                        </li>
+                    </ul>
+                    @auth
+                        <ul class="navbar-nav">
+                            <li>
+                                <form action="{{ route('auth.processLogout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link">Cerrar Sesión ({{ auth()->user()->email }})</button>
+                                </form>
                             </li>
                         </ul>
-                        @auth
-                            <ul class="navbar-nav">
-                                <li>
-                                    <form action="{{ route('auth.processLogout') }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-link">Cerrar Sesión ({{ auth()->user()->email }})</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        @endauth
-                    </div>
+                    @endauth
                 </div>
-            </nav>
-        @endif
+            </div>
+        </nav>
     </header>
 
     <div class="container my-3">

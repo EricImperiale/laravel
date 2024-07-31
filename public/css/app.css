@@ -2,3 +2,9 @@ a,
 button.btn-link {
     text-decoration: none !important;
 }
+
+#login-form {
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+}

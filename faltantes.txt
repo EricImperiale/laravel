@@ -1,0 +1,32 @@
+En general:
+
+Agregar colores de la identidad
+Falta propiedades módulo
+Hacer todo responsive
+Verificar que todo funcione
+Acomodar código
+
+Iniciar sesión
+
+Centrar formulario y agregar logo
+Agregar ver/ocultar contraseña
+Posible, recordar mi sesión
+Agregar link para redireccionar al crear cuenta y viceversa
+Acomodar navbar
+
+Crear Cuenta
+
+Centrar formulario y agregar logo
+Agregar ver/ocultar contraseña
+Agregar link para redireccionar al iniciar sesión y viceversa
+Acomodar navbar
+
+Contratos
+
+Agregar filtro
+Agregar impuestos
+
+Propiedades
+Propiedades
+Vista ampliada
+
