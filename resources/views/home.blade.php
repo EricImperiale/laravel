@@ -12,13 +12,14 @@
     <title>@yield('title') :: Propi360</title>
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
-<div class="my-3">
-    @if(Session::has('status.message'))
-        <div class="alert alert-{{ Session::get('status.type') === 'error' ? 'danger' : 'success' }}">{!! Session::get('status.message') !!}</div>
-    @endif
-</div>
 
 <main class="container my-3">
+    <div class="my-3">
+        @if(Session::has('status.message'))
+            <div class="alert alert-{{ Session::get('status.type') === 'error' ? 'danger' : 'success' }}">{!! Session::get('status.message') !!}</div>
+        @endif
+    </div>
+
     @yield('main')
 </main>
 

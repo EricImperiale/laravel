@@ -25,6 +25,9 @@
                             <a class="nav-link {{ Request::is('contratos*') ? 'active' : '' }}" href="{{ route('contratos.index') }}">Contratos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ Request::is('propiedades*') ? 'active' : '' }}" href="{{ route('propiedades.index') }}">Propiedades</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ Request::is('propietarios*') ? 'active' : '' }}" href="{{ route('propietarios.index') }}">Propietarios</a>
                         </li>
                         <li class="nav-item">

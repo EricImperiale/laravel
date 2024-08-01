@@ -64,7 +64,7 @@
 
         showPasswordCheckbox.addEventListener('change', function () {
             let inputPassword = document.getElementById('password');
-            
+
             if (inputPassword.type === 'text') {
                 inputPassword.type = 'password';
             } else {

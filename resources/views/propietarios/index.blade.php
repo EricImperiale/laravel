@@ -9,17 +9,17 @@
 @section('main')
     <section>
         <header class="mb-3">
-            <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb" class="small">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Propietarios</li>
                 </ol>
             </nav>
 
-            <h2 class="mb-2">Propietarios</h2>
+            <h2 class="fs-1 mb-2 fw-bold">Propietarios</h2>
             <a href="{{ route('propietarios.formCreate') }}">Crear Propietario</a>
 
             <form action="{{ route('propietarios.index') }}" method="get" class="my-3">
-                <label for="nombre_completo" class="form-label">Nombre y/o apellido</label>
+                <label for="nombre_completo" class="form-label text-muted small">Nombre y/o apellido</label>
                 <div class="input-group">
                     <input type="text" id="nombre_completo" name="nc" class="form-control"
                            value="{{ $filtrosPropietario->getNombreCompleto() ?? null }}"
@@ -56,8 +56,8 @@
                             <td>{{ $propietario->email }}</td>
                             <td>{{ $propietario->direccionCompleta }}</td>
                             <td class="d-flex gap-2">
-                                <a href="{{ route('propietarios.formUpdate', ['id' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('propietarios.formDelete', ['id' => $propietario->propietario_id]) }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                <a href="{{ route('propietarios.formUpdate', ['id' => $propietario->propietario_id]) }}" class="btn btn-warning btn-sm rounded-circle"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ route('propietarios.formDelete', ['id' => $propietario->propietario_id]) }}" class="btn btn-outline-danger btn-sm rounded-circle"><i class="bi bi-trash3-fill"></i></a>
                             </td>
                         </tr>
                     @endforeach

@@ -9,9 +9,7 @@ Acomodar código
 Iniciar sesión
 
 Centrar formulario y agregar logo
-Agregar ver/ocultar contraseña
 Posible, recordar mi sesión
-Agregar link para redireccionar al crear cuenta y viceversa
 Acomodar navbar
 
 Crear Cuenta
@@ -27,6 +25,7 @@ Agregar filtro
 Agregar impuestos
 
 Propiedades
+
 Propiedades
 Vista ampliada
 

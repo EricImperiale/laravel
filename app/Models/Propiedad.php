@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $propiedad_id
  * @property string $direccion
@@ -99,9 +99,6 @@ class Propiedad extends Model
         'expensas',
         'piso',
         'numero_de_departamento',
-        'es_uso_profesional',
-        'es_interno',
-        'antiguedad',
         'ambientes',
         'cuartos',
         'banios',
@@ -145,15 +142,6 @@ class Propiedad extends Model
         );
     }
 
-    protected function caracteristicas(): Attribute
-    {
-        return Attribute::make(
-            get: function () {
-                return $this->ambientes;
-            }
-        );
-    }
-
     public function tipoDePropiedad(): BelongsTo
     {
         return $this->belongsTo(
@@ -163,7 +151,7 @@ class Propiedad extends Model
         );
     }
 
-    public function estado(): BelongsTo
+    public function estadoDePropiedad(): BelongsTo
     {
         return $this->belongsTo(
             EstadoDePropiedad::class,

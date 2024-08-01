@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $estado_id
  * @property string $estado
@@ -26,6 +26,8 @@ class EstadoDePropiedad extends Model
     //use HasFactory;
 
     protected $primaryKey = 'estado_id';
+
+    protected $table = 'estado_de_propiedades';
 
     protected $fillable = [
         'estado_id',

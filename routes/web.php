@@ -7,6 +7,7 @@ use App\Http\Middleware\VerificarAutenticacion;
 use App\Http\Controllers\InquilinoController;
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\GaranteController;
+use App\Http\Controllers\PropiedadesController;
 
 Route::get('/', [AuthController::class, 'formLogin'])
     ->name('auth.formLogin');
@@ -110,4 +111,14 @@ Route::get('contratos/{id}/eliminar', [ContratoController::class, 'formDelete'])
     ->middleware(VerificarAutenticacion::class);
 Route::post('contratos/{id}/eliminar', [ContratoController::class, 'processDelete'])
     ->name('contratos.processDelete')
+    ->middleware(VerificarAutenticacion::class);
+
+Route::get('propiedades', [PropiedadesController::class, 'index'])
+    ->name('propiedades.index')
+    ->middleware(VerificarAutenticacion::class);
+Route::get('propiedades/crear', [PropiedadesController::class, 'formCreate'])
+    ->name('propiedades.formCreate')
+    ->middleware(VerificarAutenticacion::class);
+Route::post('propiedades/crear', [PropiedadesController::class, 'processCreate'])
+    ->name('propiedades.formCreate')
     ->middleware(VerificarAutenticacion::class);
